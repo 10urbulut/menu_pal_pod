@@ -1,0 +1,10 @@
+menuTypes:
+  - getAllMenuTypes:
+  - addMenuType:
+  - deleteMenuType:
+menus:
+  - addMenu:
+  - deleteMenu:
+  - getAllMenus:
+workPlace:
+  - workHere:

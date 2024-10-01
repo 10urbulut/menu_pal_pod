@@ -1,0 +1,68 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "menu",
+        "schema": "public",
+        "addColumns": [],
+        "deleteColumns": [
+          "data"
+        ],
+        "modifyColumns": [
+          {
+            "columnName": "name",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          },
+          {
+            "columnName": "link",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          },
+          {
+            "columnName": "brand",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          },
+          {
+            "columnName": "star",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          }
+        ],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"data\" of table \"menu\" will be dropped.",
+            "table": "menu",
+            "columns": [
+              "data"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"data\" of table \"menu\" will be dropped.",
+      "table": "menu",
+      "columns": [
+        "data"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

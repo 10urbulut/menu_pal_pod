@@ -1,0 +1,15 @@
+class: City
+table: city
+fields:
+  name: String?
+  country: int?
+  createdAt: DateTime?
+  updatedAt: DateTime?
+  deletedAt: DateTime?
+  createdBy: String?
+  latitude: double?
+  longitude: double?
+  population: int?
+  area: double?
+  currency: String?
+  timezone: String?

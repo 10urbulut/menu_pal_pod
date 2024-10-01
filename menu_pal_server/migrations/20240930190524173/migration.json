@@ -1,0 +1,50 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "menu",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "address",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "address"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column address of table menu is modified in a way that it must be deleted and recreated.",
+            "table": "menu",
+            "columns": [
+              "address"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column address of table menu is modified in a way that it must be deleted and recreated.",
+      "table": "menu",
+      "columns": [
+        "address"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

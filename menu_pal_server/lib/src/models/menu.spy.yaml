@@ -1,0 +1,26 @@
+class: Menu
+table: menu
+fields:
+  title: String?
+  description: String?
+  thumbnail: String?
+  link: String?
+  brand: String?
+  type: String?
+  star: int?
+  createdAt: DateTime?
+  updatedAt: DateTime?
+  deletedAt: DateTime?
+  createdBy: String?
+  city: int?
+  country: int?
+  category: int?
+  tags: List<String>?
+  phone: String?
+  email: String?
+  website: String?
+  addressId: int?
+
+
+
+

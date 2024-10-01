@@ -1,0 +1,16 @@
+class: Address
+table: address
+fields:
+  street: String?
+  city: int?
+  town: int?
+  district: int?
+  country: int?
+  createdAt: DateTime?
+  updatedAt: DateTime?
+  deletedAt: DateTime?
+  createdBy: String?
+  latitude: double?
+  longitude: double?
+  population: int?
+  area: double?

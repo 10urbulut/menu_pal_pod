@@ -1,0 +1,3 @@
+type: server
+
+client_package_path: ../menu_pal_client

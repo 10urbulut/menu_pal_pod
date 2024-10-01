@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "menu_pal",
+            "cwd": "menu_pal",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "menu_pal (profile mode)",
+            "cwd": "menu_pal",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "menu_pal (release mode)",
+            "cwd": "menu_pal",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "menu_pal_client",
+            "cwd": "menu_pal_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "menu_pal_server",
+            "cwd": "menu_pal_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /vendor/
+    destination: /home/ec2-user/serverpod/upload/vendor/
+  - source: /menu_pal_server/
+    destination: /home/ec2-user/serverpod/upload/menu_pal_server/
+hooks:
+  BeforeInstall:
+    - location: menu_pal_server/deploy/aws/scripts/install_dependencies
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: menu_pal_server/deploy/aws/scripts/start_server
+      timeout: 300
+      runas: root
