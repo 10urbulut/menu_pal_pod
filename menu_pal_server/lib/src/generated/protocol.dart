@@ -21,8 +21,11 @@ import 'example.dart' as _i8;
 import 'menu.dart' as _i9;
 import 'menu_type.dart' as _i10;
 import 'town.dart' as _i11;
-import 'package:menu_pal_server/src/generated/menu_type.dart' as _i12;
-import 'package:menu_pal_server/src/generated/menu.dart' as _i13;
+import 'package:menu_pal_server/src/generated/city.dart' as _i12;
+import 'package:menu_pal_server/src/generated/country.dart' as _i13;
+import 'package:menu_pal_server/src/generated/district.dart' as _i14;
+import 'package:menu_pal_server/src/generated/menu_type.dart' as _i15;
+import 'package:menu_pal_server/src/generated/menu.dart' as _i16;
 export 'address.dart';
 export 'city.dart';
 export 'country.dart';
@@ -825,12 +828,24 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<String>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i12.MenuType>) {
-      return (data as List).map((e) => deserialize<_i12.MenuType>(e)).toList()
+    if (t == List<_i12.City>) {
+      return (data as List).map((e) => deserialize<_i12.City>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.Menu>) {
-      return (data as List).map((e) => deserialize<_i13.Menu>(e)).toList()
+    if (t == List<_i13.Country>) {
+      return (data as List).map((e) => deserialize<_i13.Country>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i14.District>) {
+      return (data as List).map((e) => deserialize<_i14.District>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i15.MenuType>) {
+      return (data as List).map((e) => deserialize<_i15.MenuType>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i16.Menu>) {
+      return (data as List).map((e) => deserialize<_i16.Menu>(e)).toList()
           as dynamic;
     }
     try {

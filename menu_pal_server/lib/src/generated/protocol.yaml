@@ -1,7 +1,27 @@
+cities:
+  - getAllCities:
+  - getCity:
+  - addCity:
+  - deleteCity:
+  - updateCity:
+countries:
+  - getAllCountries:
+  - getCountry:
+  - addCountry:
+  - deleteCountry:
+  - updateCountry:
+districts:
+  - getAllDistricts:
+  - getDistrict:
+  - addDistrict:
+  - deleteDistrict:
+  - updateDistrict:
 menuTypes:
   - getAllMenuTypes:
+  - getMenuType:
   - addMenuType:
   - deleteMenuType:
+  - updateMenuType:
 menus:
   - addMenu:
   - deleteMenu:

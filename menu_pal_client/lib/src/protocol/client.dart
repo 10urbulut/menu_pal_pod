@@ -11,10 +11,141 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i3;
-import 'package:menu_pal_client/src/protocol/menu.dart' as _i4;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'package:menu_pal_client/src/protocol/city.dart' as _i3;
+import 'package:menu_pal_client/src/protocol/country.dart' as _i4;
+import 'package:menu_pal_client/src/protocol/district.dart' as _i5;
+import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i6;
+import 'package:menu_pal_client/src/protocol/menu.dart' as _i7;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i8;
+import 'protocol.dart' as _i9;
+
+/// {@category Endpoint}
+class EndpointCities extends _i1.EndpointRef {
+  EndpointCities(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'cities';
+
+  _i2.Future<List<_i3.City>> getAllCities() =>
+      caller.callServerEndpoint<List<_i3.City>>(
+        'cities',
+        'getAllCities',
+        {},
+      );
+
+  _i2.Future<_i3.City?> getCity(int id) => caller.callServerEndpoint<_i3.City?>(
+        'cities',
+        'getCity',
+        {'id': id},
+      );
+
+  _i2.Future<_i3.City> addCity(_i3.City entity) =>
+      caller.callServerEndpoint<_i3.City>(
+        'cities',
+        'addCity',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i3.City> deleteCity(_i3.City entity) =>
+      caller.callServerEndpoint<_i3.City>(
+        'cities',
+        'deleteCity',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i3.City> updateCity(_i3.City entity) =>
+      caller.callServerEndpoint<_i3.City>(
+        'cities',
+        'updateCity',
+        {'entity': entity},
+      );
+}
+
+/// {@category Endpoint}
+class EndpointCountries extends _i1.EndpointRef {
+  EndpointCountries(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'countries';
+
+  _i2.Future<List<_i4.Country>> getAllCountries() =>
+      caller.callServerEndpoint<List<_i4.Country>>(
+        'countries',
+        'getAllCountries',
+        {},
+      );
+
+  _i2.Future<_i4.Country?> getCountry(int id) =>
+      caller.callServerEndpoint<_i4.Country?>(
+        'countries',
+        'getCountry',
+        {'id': id},
+      );
+
+  _i2.Future<_i4.Country> addCountry(_i4.Country entity) =>
+      caller.callServerEndpoint<_i4.Country>(
+        'countries',
+        'addCountry',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i4.Country> deleteCountry(_i4.Country entity) =>
+      caller.callServerEndpoint<_i4.Country>(
+        'countries',
+        'deleteCountry',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i4.Country> updateCountry(_i4.Country entity) =>
+      caller.callServerEndpoint<_i4.Country>(
+        'countries',
+        'updateCountry',
+        {'entity': entity},
+      );
+}
+
+/// {@category Endpoint}
+class EndpointDistricts extends _i1.EndpointRef {
+  EndpointDistricts(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'districts';
+
+  _i2.Future<List<_i5.District>> getAllDistricts() =>
+      caller.callServerEndpoint<List<_i5.District>>(
+        'districts',
+        'getAllDistricts',
+        {},
+      );
+
+  _i2.Future<_i5.District?> getDistrict(int id) =>
+      caller.callServerEndpoint<_i5.District?>(
+        'districts',
+        'getDistrict',
+        {'id': id},
+      );
+
+  _i2.Future<_i5.District> addDistrict(_i5.District entity) =>
+      caller.callServerEndpoint<_i5.District>(
+        'districts',
+        'addDistrict',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i5.District> deleteDistrict(_i5.District entity) =>
+      caller.callServerEndpoint<_i5.District>(
+        'districts',
+        'deleteDistrict',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i5.District> updateDistrict(_i5.District entity) =>
+      caller.callServerEndpoint<_i5.District>(
+        'districts',
+        'updateDistrict',
+        {'entity': entity},
+      );
+}
 
 /// {@category Endpoint}
 class EndpointMenuTypes extends _i1.EndpointRef {
@@ -23,25 +154,39 @@ class EndpointMenuTypes extends _i1.EndpointRef {
   @override
   String get name => 'menuTypes';
 
-  _i2.Future<List<_i3.MenuType>> getAllMenuTypes() =>
-      caller.callServerEndpoint<List<_i3.MenuType>>(
+  _i2.Future<List<_i6.MenuType>> getAllMenuTypes() =>
+      caller.callServerEndpoint<List<_i6.MenuType>>(
         'menuTypes',
         'getAllMenuTypes',
         {},
       );
 
-  _i2.Future<void> addMenuType(_i3.MenuType menu) =>
-      caller.callServerEndpoint<void>(
+  _i2.Future<_i6.MenuType?> getMenuType(int id) =>
+      caller.callServerEndpoint<_i6.MenuType?>(
         'menuTypes',
-        'addMenuType',
-        {'menu': menu},
+        'getMenuType',
+        {'id': id},
       );
 
-  _i2.Future<void> deleteMenuType(_i3.MenuType menu) =>
-      caller.callServerEndpoint<void>(
+  _i2.Future<_i6.MenuType> addMenuType(_i6.MenuType menuType) =>
+      caller.callServerEndpoint<_i6.MenuType>(
+        'menuTypes',
+        'addMenuType',
+        {'menuType': menuType},
+      );
+
+  _i2.Future<_i6.MenuType> deleteMenuType(_i6.MenuType menuType) =>
+      caller.callServerEndpoint<_i6.MenuType>(
         'menuTypes',
         'deleteMenuType',
-        {'menu': menu},
+        {'menuType': menuType},
+      );
+
+  _i2.Future<_i6.MenuType> updateMenuType(_i6.MenuType menuType) =>
+      caller.callServerEndpoint<_i6.MenuType>(
+        'menuTypes',
+        'updateMenuType',
+        {'menuType': menuType},
       );
 }
 
@@ -52,20 +197,20 @@ class EndpointMenus extends _i1.EndpointRef {
   @override
   String get name => 'menus';
 
-  _i2.Future<void> addMenu(_i4.Menu menu) => caller.callServerEndpoint<void>(
+  _i2.Future<void> addMenu(_i7.Menu menu) => caller.callServerEndpoint<void>(
         'menus',
         'addMenu',
         {'menu': menu},
       );
 
-  _i2.Future<void> deleteMenu(_i4.Menu menu) => caller.callServerEndpoint<void>(
+  _i2.Future<void> deleteMenu(_i7.Menu menu) => caller.callServerEndpoint<void>(
         'menus',
         'deleteMenu',
         {'menu': menu},
       );
 
-  _i2.Future<List<_i4.Menu>> getAllMenus() =>
-      caller.callServerEndpoint<List<_i4.Menu>>(
+  _i2.Future<List<_i7.Menu>> getAllMenus() =>
+      caller.callServerEndpoint<List<_i7.Menu>>(
         'menus',
         'getAllMenus',
         {},
@@ -88,10 +233,10 @@ class EndpointWorkPlace extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i5.Caller(client);
+    auth = _i8.Caller(client);
   }
 
-  late final _i5.Caller auth;
+  late final _i8.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -110,7 +255,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i6.Protocol(),
+          _i9.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -120,11 +265,20 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    cities = EndpointCities(this);
+    countries = EndpointCountries(this);
+    districts = EndpointDistricts(this);
     menuTypes = EndpointMenuTypes(this);
     menus = EndpointMenus(this);
     workPlace = EndpointWorkPlace(this);
     modules = _Modules(this);
   }
+
+  late final EndpointCities cities;
+
+  late final EndpointCountries countries;
+
+  late final EndpointDistricts districts;
 
   late final EndpointMenuTypes menuTypes;
 
@@ -136,6 +290,9 @@ class Client extends _i1.ServerpodClientShared {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'cities': cities,
+        'countries': countries,
+        'districts': districts,
         'menuTypes': menuTypes,
         'menus': menus,
         'workPlace': workPlace,
