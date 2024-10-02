@@ -21,11 +21,13 @@ import 'example.dart' as _i8;
 import 'menu.dart' as _i9;
 import 'menu_type.dart' as _i10;
 import 'town.dart' as _i11;
-import 'package:menu_pal_server/src/generated/city.dart' as _i12;
-import 'package:menu_pal_server/src/generated/country.dart' as _i13;
-import 'package:menu_pal_server/src/generated/district.dart' as _i14;
-import 'package:menu_pal_server/src/generated/menu_type.dart' as _i15;
-import 'package:menu_pal_server/src/generated/menu.dart' as _i16;
+import 'protocol.dart' as _i12;
+import 'package:menu_pal_server/src/generated/city.dart' as _i13;
+import 'package:menu_pal_server/src/generated/country.dart' as _i14;
+import 'package:menu_pal_server/src/generated/district.dart' as _i15;
+import 'package:menu_pal_server/src/generated/menu_type.dart' as _i16;
+import 'package:menu_pal_server/src/generated/menu.dart' as _i17;
+import 'package:menu_pal_server/src/generated/town.dart' as _i18;
 export 'address.dart';
 export 'city.dart';
 export 'country.dart';
@@ -173,7 +175,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'country',
+          name: 'countryId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
@@ -239,7 +241,18 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'city_fk_0',
+          columns: ['countryId'],
+          referenceTable: 'country',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'city_pkey',
@@ -375,7 +388,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'city',
+          name: 'cityId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
@@ -435,7 +448,18 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'district_fk_0',
+          columns: ['cityId'],
+          referenceTable: 'city',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'district_pkey',
@@ -687,7 +711,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'district',
+          name: 'districtId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
@@ -734,20 +758,19 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: true,
           dartType: 'int?',
         ),
-        _i2.ColumnDefinition(
-          name: 'area',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: true,
-          dartType: 'double?',
-        ),
-        _i2.ColumnDefinition(
-          name: 'timezone',
-          columnType: _i2.ColumnType.text,
-          isNullable: true,
-          dartType: 'String?',
-        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'town_fk_0',
+          columns: ['districtId'],
+          referenceTable: 'district',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'town_pkey',
@@ -823,29 +846,48 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i11.Town?>()) {
       return (data != null ? _i11.Town.fromJson(data) : null) as T;
     }
+    if (t == _i1.getType<List<_i12.District>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i12.District>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.City>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i12.City>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.Town>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i12.Town>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i12.City>) {
-      return (data as List).map((e) => deserialize<_i12.City>(e)).toList()
+    if (t == List<_i13.City>) {
+      return (data as List).map((e) => deserialize<_i13.City>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.Country>) {
-      return (data as List).map((e) => deserialize<_i13.Country>(e)).toList()
+    if (t == List<_i14.Country>) {
+      return (data as List).map((e) => deserialize<_i14.Country>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.District>) {
-      return (data as List).map((e) => deserialize<_i14.District>(e)).toList()
+    if (t == List<_i15.District>) {
+      return (data as List).map((e) => deserialize<_i15.District>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i15.MenuType>) {
-      return (data as List).map((e) => deserialize<_i15.MenuType>(e)).toList()
+    if (t == List<_i16.MenuType>) {
+      return (data as List).map((e) => deserialize<_i16.MenuType>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i16.Menu>) {
-      return (data as List).map((e) => deserialize<_i16.Menu>(e)).toList()
+    if (t == List<_i17.Menu>) {
+      return (data as List).map((e) => deserialize<_i17.Menu>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i18.Town>) {
+      return (data as List).map((e) => deserialize<_i18.Town>(e)).toList()
           as dynamic;
     }
     try {

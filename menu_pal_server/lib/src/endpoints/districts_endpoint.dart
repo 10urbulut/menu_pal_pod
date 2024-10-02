@@ -6,6 +6,14 @@ class DistrictsEndpoint extends Endpoint {
     return await District.db.find(session, orderBy: (t) => t.id);
   }
 
+  Future<List<District>> getDistrictsByCity(Session session, int cityId) async {
+    return await District.db.find(
+      session,
+      where: (table) => table.cityId.equals(cityId),
+      orderBy: (t) => t.name,
+    );
+  }
+
   Future<District?> getDistrict(Session session, int id) async {
     return await District.db.findById(session, id);
   }

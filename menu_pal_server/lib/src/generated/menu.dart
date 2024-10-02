@@ -11,9 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Menu extends _i1.TableRow implements _i1.ProtocolSerialization {
+abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
   Menu._({
-    int? id,
+    this.id,
     this.title,
     this.description,
     this.thumbnail,
@@ -33,7 +33,7 @@ abstract class Menu extends _i1.TableRow implements _i1.ProtocolSerialization {
     this.email,
     this.website,
     this.addressId,
-  }) : super(id);
+  });
 
   factory Menu({
     int? id,
@@ -94,6 +94,9 @@ abstract class Menu extends _i1.TableRow implements _i1.ProtocolSerialization {
   static final t = MenuTable();
 
   static const db = MenuRepository._();
+
+  @override
+  int? id;
 
   String? title;
 

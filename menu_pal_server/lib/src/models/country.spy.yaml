@@ -12,3 +12,4 @@ fields:
   area: double?
   currency: String?
   timezone: String?
+  cities: List<City>?, relation(name = city_country)

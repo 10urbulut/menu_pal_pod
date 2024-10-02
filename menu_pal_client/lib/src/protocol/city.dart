@@ -10,12 +10,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class City implements _i1.SerializableModel {
   City._({
     this.id,
     this.name,
-    this.country,
+    this.countryId,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -26,12 +27,14 @@ abstract class City implements _i1.SerializableModel {
     this.area,
     this.currency,
     this.timezone,
+    this.districts,
+    this.country,
   });
 
   factory City({
     int? id,
     String? name,
-    int? country,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -42,13 +45,15 @@ abstract class City implements _i1.SerializableModel {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.District>? districts,
+    _i2.Country? country,
   }) = _CityImpl;
 
   factory City.fromJson(Map<String, dynamic> jsonSerialization) {
     return City(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String?,
-      country: jsonSerialization['country'] as int?,
+      countryId: jsonSerialization['countryId'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -65,6 +70,13 @@ abstract class City implements _i1.SerializableModel {
       area: (jsonSerialization['area'] as num?)?.toDouble(),
       currency: jsonSerialization['currency'] as String?,
       timezone: jsonSerialization['timezone'] as String?,
+      districts: (jsonSerialization['districts'] as List?)
+          ?.map((e) => _i2.District.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      country: jsonSerialization['country'] == null
+          ? null
+          : _i2.Country.fromJson(
+              (jsonSerialization['country'] as Map<String, dynamic>)),
     );
   }
 
@@ -75,7 +87,7 @@ abstract class City implements _i1.SerializableModel {
 
   String? name;
 
-  int? country;
+  int? countryId;
 
   DateTime? createdAt;
 
@@ -97,10 +109,14 @@ abstract class City implements _i1.SerializableModel {
 
   String? timezone;
 
+  List<_i2.District>? districts;
+
+  _i2.Country? country;
+
   City copyWith({
     int? id,
     String? name,
-    int? country,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -111,13 +127,15 @@ abstract class City implements _i1.SerializableModel {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.District>? districts,
+    _i2.Country? country,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (country != null) 'country': country,
+      if (countryId != null) 'countryId': countryId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -128,6 +146,9 @@ abstract class City implements _i1.SerializableModel {
       if (area != null) 'area': area,
       if (currency != null) 'currency': currency,
       if (timezone != null) 'timezone': timezone,
+      if (districts != null)
+        'districts': districts?.toJson(valueToJson: (v) => v.toJson()),
+      if (country != null) 'country': country?.toJson(),
     };
   }
 
@@ -143,7 +164,7 @@ class _CityImpl extends City {
   _CityImpl({
     int? id,
     String? name,
-    int? country,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -154,10 +175,12 @@ class _CityImpl extends City {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.District>? districts,
+    _i2.Country? country,
   }) : super._(
           id: id,
           name: name,
-          country: country,
+          countryId: countryId,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
@@ -168,13 +191,15 @@ class _CityImpl extends City {
           area: area,
           currency: currency,
           timezone: timezone,
+          districts: districts,
+          country: country,
         );
 
   @override
   City copyWith({
     Object? id = _Undefined,
     Object? name = _Undefined,
-    Object? country = _Undefined,
+    Object? countryId = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
@@ -185,11 +210,13 @@ class _CityImpl extends City {
     Object? area = _Undefined,
     Object? currency = _Undefined,
     Object? timezone = _Undefined,
+    Object? districts = _Undefined,
+    Object? country = _Undefined,
   }) {
     return City(
       id: id is int? ? id : this.id,
       name: name is String? ? name : this.name,
-      country: country is int? ? country : this.country,
+      countryId: countryId is int? ? countryId : this.countryId,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
@@ -200,6 +227,10 @@ class _CityImpl extends City {
       area: area is double? ? area : this.area,
       currency: currency is String? ? currency : this.currency,
       timezone: timezone is String? ? timezone : this.timezone,
+      districts: districts is List<_i2.District>?
+          ? districts
+          : this.districts?.map((e0) => e0.copyWith()).toList(),
+      country: country is _i2.Country? ? country : this.country?.copyWith(),
     );
   }
 }

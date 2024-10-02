@@ -1,0 +1,102 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "town",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "districtId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "district",
+          "area",
+          "timezone"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [
+          {
+            "constraintName": "town_fk_0",
+            "columns": [
+              "districtId"
+            ],
+            "referenceTable": "district",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 3,
+            "onDelete": 3
+          }
+        ],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"district\" of table \"town\" will be dropped.",
+            "table": "town",
+            "columns": [
+              "district"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"area\" of table \"town\" will be dropped.",
+            "table": "town",
+            "columns": [
+              "area"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"timezone\" of table \"town\" will be dropped.",
+            "table": "town",
+            "columns": [
+              "timezone"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"district\" of table \"town\" will be dropped.",
+      "table": "town",
+      "columns": [
+        "district"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"area\" of table \"town\" will be dropped.",
+      "table": "town",
+      "columns": [
+        "area"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"timezone\" of table \"town\" will be dropped.",
+      "table": "town",
+      "columns": [
+        "timezone"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

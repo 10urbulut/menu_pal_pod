@@ -6,6 +6,14 @@ class CitiesEndpoint extends Endpoint {
     return await City.db.find(session, orderBy: (t) => t.id);
   }
 
+  Future<List<City>> getCitiesByCountry(Session session, int countryId) async {
+    return await City.db.find(
+      session,
+      where: (table) => table.countryId.equals(countryId),
+      orderBy: (t) => t.name,
+    );
+  }
+
   Future<City?> getCity(Session session, int id) async {
     return await City.db.findById(session, id);
   }

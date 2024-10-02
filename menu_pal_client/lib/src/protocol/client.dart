@@ -16,8 +16,9 @@ import 'package:menu_pal_client/src/protocol/country.dart' as _i4;
 import 'package:menu_pal_client/src/protocol/district.dart' as _i5;
 import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i6;
 import 'package:menu_pal_client/src/protocol/menu.dart' as _i7;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i8;
-import 'protocol.dart' as _i9;
+import 'package:menu_pal_client/src/protocol/town.dart' as _i8;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i9;
+import 'protocol.dart' as _i10;
 
 /// {@category Endpoint}
 class EndpointCities extends _i1.EndpointRef {
@@ -31,6 +32,13 @@ class EndpointCities extends _i1.EndpointRef {
         'cities',
         'getAllCities',
         {},
+      );
+
+  _i2.Future<List<_i3.City>> getCitiesByCountry(int countryId) =>
+      caller.callServerEndpoint<List<_i3.City>>(
+        'cities',
+        'getCitiesByCountry',
+        {'countryId': countryId},
       );
 
   _i2.Future<_i3.City?> getCity(int id) => caller.callServerEndpoint<_i3.City?>(
@@ -116,6 +124,13 @@ class EndpointDistricts extends _i1.EndpointRef {
         'districts',
         'getAllDistricts',
         {},
+      );
+
+  _i2.Future<List<_i5.District>> getDistrictsByCity(int cityId) =>
+      caller.callServerEndpoint<List<_i5.District>>(
+        'districts',
+        'getDistrictsByCity',
+        {'cityId': cityId},
       );
 
   _i2.Future<_i5.District?> getDistrict(int id) =>
@@ -218,6 +233,55 @@ class EndpointMenus extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointTowns extends _i1.EndpointRef {
+  EndpointTowns(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'towns';
+
+  _i2.Future<List<_i8.Town>> getAllTowns() =>
+      caller.callServerEndpoint<List<_i8.Town>>(
+        'towns',
+        'getAllTowns',
+        {},
+      );
+
+  _i2.Future<List<_i8.Town>> getTownsByDistrict(int districtId) =>
+      caller.callServerEndpoint<List<_i8.Town>>(
+        'towns',
+        'getTownsByDistrict',
+        {'districtId': districtId},
+      );
+
+  _i2.Future<_i8.Town?> getTown(int id) => caller.callServerEndpoint<_i8.Town?>(
+        'towns',
+        'getTown',
+        {'id': id},
+      );
+
+  _i2.Future<_i8.Town> addTown(_i8.Town entity) =>
+      caller.callServerEndpoint<_i8.Town>(
+        'towns',
+        'addTown',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i8.Town> deleteTown(_i8.Town entity) =>
+      caller.callServerEndpoint<_i8.Town>(
+        'towns',
+        'deleteTown',
+        {'entity': entity},
+      );
+
+  _i2.Future<_i8.Town> updateTown(_i8.Town entity) =>
+      caller.callServerEndpoint<_i8.Town>(
+        'towns',
+        'updateTown',
+        {'entity': entity},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointWorkPlace extends _i1.EndpointRef {
   EndpointWorkPlace(_i1.EndpointCaller caller) : super(caller);
 
@@ -233,10 +297,10 @@ class EndpointWorkPlace extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i8.Caller(client);
+    auth = _i9.Caller(client);
   }
 
-  late final _i8.Caller auth;
+  late final _i9.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -255,7 +319,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i9.Protocol(),
+          _i10.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -270,6 +334,7 @@ class Client extends _i1.ServerpodClientShared {
     districts = EndpointDistricts(this);
     menuTypes = EndpointMenuTypes(this);
     menus = EndpointMenus(this);
+    towns = EndpointTowns(this);
     workPlace = EndpointWorkPlace(this);
     modules = _Modules(this);
   }
@@ -284,6 +349,8 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointMenus menus;
 
+  late final EndpointTowns towns;
+
   late final EndpointWorkPlace workPlace;
 
   late final _Modules modules;
@@ -295,6 +362,7 @@ class Client extends _i1.ServerpodClientShared {
         'districts': districts,
         'menuTypes': menuTypes,
         'menus': menus,
+        'towns': towns,
         'workPlace': workPlace,
       };
 

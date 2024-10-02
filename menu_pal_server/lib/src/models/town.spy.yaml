@@ -2,7 +2,7 @@ class: Town
 table: town
 fields:
   name: String?
-  district: int?
+  districtId: int?
   createdAt: DateTime?
   updatedAt: DateTime?
   deletedAt: DateTime?
@@ -10,5 +10,4 @@ fields:
   latitude: double?
   longitude: double?
   population: int?
-  area: double?
-  timezone: String?
+  district: District?, relation(name = town_district, field=districtId)

@@ -1,0 +1,139 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "city",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "countryId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "country"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [
+          {
+            "constraintName": "city_fk_0",
+            "columns": [
+              "countryId"
+            ],
+            "referenceTable": "country",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 3,
+            "onDelete": 3
+          }
+        ],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"country\" of table \"city\" will be dropped.",
+            "table": "city",
+            "columns": [
+              "country"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"city\" of table \"district\" will be dropped.",
+            "table": "district",
+            "columns": [
+              "city"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    },
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "district",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "cityId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "city"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [
+          {
+            "constraintName": "district_fk_0",
+            "columns": [
+              "cityId"
+            ],
+            "referenceTable": "city",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 3,
+            "onDelete": 3
+          }
+        ],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"country\" of table \"city\" will be dropped.",
+            "table": "city",
+            "columns": [
+              "country"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"city\" of table \"district\" will be dropped.",
+            "table": "district",
+            "columns": [
+              "city"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"country\" of table \"city\" will be dropped.",
+      "table": "city",
+      "columns": [
+        "country"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"city\" of table \"district\" will be dropped.",
+      "table": "district",
+      "columns": [
+        "city"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

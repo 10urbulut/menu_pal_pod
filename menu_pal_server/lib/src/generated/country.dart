@@ -10,11 +10,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'protocol.dart' as _i2;
 
-abstract class Country extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Country implements _i1.TableRow, _i1.ProtocolSerialization {
   Country._({
-    int? id,
+    this.id,
     this.name,
     this.createdAt,
     this.updatedAt,
@@ -26,7 +26,8 @@ abstract class Country extends _i1.TableRow
     this.area,
     this.currency,
     this.timezone,
-  }) : super(id);
+    this.cities,
+  });
 
   factory Country({
     int? id,
@@ -41,6 +42,7 @@ abstract class Country extends _i1.TableRow
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   }) = _CountryImpl;
 
   factory Country.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -63,12 +65,18 @@ abstract class Country extends _i1.TableRow
       area: (jsonSerialization['area'] as num?)?.toDouble(),
       currency: jsonSerialization['currency'] as String?,
       timezone: jsonSerialization['timezone'] as String?,
+      cities: (jsonSerialization['cities'] as List?)
+          ?.map((e) => _i2.City.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
   static final t = CountryTable();
 
   static const db = CountryRepository._();
+
+  @override
+  int? id;
 
   String? name;
 
@@ -92,6 +100,8 @@ abstract class Country extends _i1.TableRow
 
   String? timezone;
 
+  List<_i2.City>? cities;
+
   @override
   _i1.Table get table => t;
 
@@ -108,6 +118,7 @@ abstract class Country extends _i1.TableRow
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -124,6 +135,8 @@ abstract class Country extends _i1.TableRow
       if (area != null) 'area': area,
       if (currency != null) 'currency': currency,
       if (timezone != null) 'timezone': timezone,
+      if (cities != null)
+        'cities': cities?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -142,11 +155,13 @@ abstract class Country extends _i1.TableRow
       if (area != null) 'area': area,
       if (currency != null) 'currency': currency,
       if (timezone != null) 'timezone': timezone,
+      if (cities != null)
+        'cities': cities?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
   }
 
-  static CountryInclude include() {
-    return CountryInclude._();
+  static CountryInclude include({_i2.CityIncludeList? cities}) {
+    return CountryInclude._(cities: cities);
   }
 
   static CountryIncludeList includeList({
@@ -191,6 +206,7 @@ class _CountryImpl extends Country {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   }) : super._(
           id: id,
           name: name,
@@ -204,6 +220,7 @@ class _CountryImpl extends Country {
           area: area,
           currency: currency,
           timezone: timezone,
+          cities: cities,
         );
 
   @override
@@ -220,6 +237,7 @@ class _CountryImpl extends Country {
     Object? area = _Undefined,
     Object? currency = _Undefined,
     Object? timezone = _Undefined,
+    Object? cities = _Undefined,
   }) {
     return Country(
       id: id is int? ? id : this.id,
@@ -234,6 +252,9 @@ class _CountryImpl extends Country {
       area: area is double? ? area : this.area,
       currency: currency is String? ? currency : this.currency,
       timezone: timezone is String? ? timezone : this.timezone,
+      cities: cities is List<_i2.City>?
+          ? cities
+          : this.cities?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }
@@ -308,6 +329,41 @@ class CountryTable extends _i1.Table {
 
   late final _i1.ColumnString timezone;
 
+  _i2.CityTable? ___cities;
+
+  _i1.ManyRelation<_i2.CityTable>? _cities;
+
+  _i2.CityTable get __cities {
+    if (___cities != null) return ___cities!;
+    ___cities = _i1.createRelationTable(
+      relationFieldName: '__cities',
+      field: Country.t.id,
+      foreignField: _i2.City.t.countryId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.CityTable(tableRelation: foreignTableRelation),
+    );
+    return ___cities!;
+  }
+
+  _i1.ManyRelation<_i2.CityTable> get cities {
+    if (_cities != null) return _cities!;
+    var relationTable = _i1.createRelationTable(
+      relationFieldName: 'cities',
+      field: Country.t.id,
+      foreignField: _i2.City.t.countryId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.CityTable(tableRelation: foreignTableRelation),
+    );
+    _cities = _i1.ManyRelation<_i2.CityTable>(
+      tableWithRelations: relationTable,
+      table: _i2.CityTable(
+          tableRelation: relationTable.tableRelation!.lastRelation),
+    );
+    return _cities!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -323,13 +379,25 @@ class CountryTable extends _i1.Table {
         currency,
         timezone,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'cities') {
+      return __cities;
+    }
+    return null;
+  }
 }
 
 class CountryInclude extends _i1.IncludeObject {
-  CountryInclude._();
+  CountryInclude._({_i2.CityIncludeList? cities}) {
+    _cities = cities;
+  }
+
+  _i2.CityIncludeList? _cities;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'cities': _cities};
 
   @override
   _i1.Table get table => Country.t;
@@ -358,6 +426,14 @@ class CountryIncludeList extends _i1.IncludeList {
 class CountryRepository {
   const CountryRepository._();
 
+  final attach = const CountryAttachRepository._();
+
+  final attachRow = const CountryAttachRowRepository._();
+
+  final detach = const CountryDetachRepository._();
+
+  final detachRow = const CountryDetachRowRepository._();
+
   Future<List<Country>> find(
     _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<CountryTable>? where,
@@ -367,6 +443,7 @@ class CountryRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<CountryTable>? orderByList,
     _i1.Transaction? transaction,
+    CountryInclude? include,
   }) async {
     return databaseAccessor.db.find<Country>(
       where: where?.call(Country.t),
@@ -376,6 +453,7 @@ class CountryRepository {
       limit: limit,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -387,6 +465,7 @@ class CountryRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<CountryTable>? orderByList,
     _i1.Transaction? transaction,
+    CountryInclude? include,
   }) async {
     return databaseAccessor.db.findFirstRow<Country>(
       where: where?.call(Country.t),
@@ -395,6 +474,7 @@ class CountryRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -402,10 +482,12 @@ class CountryRepository {
     _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
+    CountryInclude? include,
   }) async {
     return databaseAccessor.db.findById<Country>(
       id,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -499,6 +581,98 @@ class CountryRepository {
     return databaseAccessor.db.count<Country>(
       where: where?.call(Country.t),
       limit: limit,
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class CountryAttachRepository {
+  const CountryAttachRepository._();
+
+  Future<void> cities(
+    _i1.DatabaseAccessor databaseAccessor,
+    Country country,
+    List<_i2.City> city, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (city.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('city.id');
+    }
+    if (country.id == null) {
+      throw ArgumentError.notNull('country.id');
+    }
+
+    var $city = city.map((e) => e.copyWith(countryId: country.id)).toList();
+    await databaseAccessor.db.update<_i2.City>(
+      $city,
+      columns: [_i2.City.t.countryId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class CountryAttachRowRepository {
+  const CountryAttachRowRepository._();
+
+  Future<void> cities(
+    _i1.DatabaseAccessor databaseAccessor,
+    Country country,
+    _i2.City city, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (city.id == null) {
+      throw ArgumentError.notNull('city.id');
+    }
+    if (country.id == null) {
+      throw ArgumentError.notNull('country.id');
+    }
+
+    var $city = city.copyWith(countryId: country.id);
+    await databaseAccessor.db.updateRow<_i2.City>(
+      $city,
+      columns: [_i2.City.t.countryId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class CountryDetachRepository {
+  const CountryDetachRepository._();
+
+  Future<void> cities(
+    _i1.DatabaseAccessor databaseAccessor,
+    List<_i2.City> city, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (city.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('city.id');
+    }
+
+    var $city = city.map((e) => e.copyWith(countryId: null)).toList();
+    await databaseAccessor.db.update<_i2.City>(
+      $city,
+      columns: [_i2.City.t.countryId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class CountryDetachRowRepository {
+  const CountryDetachRowRepository._();
+
+  Future<void> cities(
+    _i1.DatabaseAccessor databaseAccessor,
+    _i2.City city, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (city.id == null) {
+      throw ArgumentError.notNull('city.id');
+    }
+
+    var $city = city.copyWith(countryId: null);
+    await databaseAccessor.db.updateRow<_i2.City>(
+      $city,
+      columns: [_i2.City.t.countryId],
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }

@@ -10,12 +10,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Town implements _i1.SerializableModel {
   Town._({
     this.id,
     this.name,
-    this.district,
+    this.districtId,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -23,14 +24,13 @@ abstract class Town implements _i1.SerializableModel {
     this.latitude,
     this.longitude,
     this.population,
-    this.area,
-    this.timezone,
+    this.district,
   });
 
   factory Town({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -38,15 +38,14 @@ abstract class Town implements _i1.SerializableModel {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   }) = _TownImpl;
 
   factory Town.fromJson(Map<String, dynamic> jsonSerialization) {
     return Town(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String?,
-      district: jsonSerialization['district'] as int?,
+      districtId: jsonSerialization['districtId'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -60,8 +59,10 @@ abstract class Town implements _i1.SerializableModel {
       latitude: (jsonSerialization['latitude'] as num?)?.toDouble(),
       longitude: (jsonSerialization['longitude'] as num?)?.toDouble(),
       population: jsonSerialization['population'] as int?,
-      area: (jsonSerialization['area'] as num?)?.toDouble(),
-      timezone: jsonSerialization['timezone'] as String?,
+      district: jsonSerialization['district'] == null
+          ? null
+          : _i2.District.fromJson(
+              (jsonSerialization['district'] as Map<String, dynamic>)),
     );
   }
 
@@ -72,7 +73,7 @@ abstract class Town implements _i1.SerializableModel {
 
   String? name;
 
-  int? district;
+  int? districtId;
 
   DateTime? createdAt;
 
@@ -88,14 +89,12 @@ abstract class Town implements _i1.SerializableModel {
 
   int? population;
 
-  double? area;
-
-  String? timezone;
+  _i2.District? district;
 
   Town copyWith({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -103,15 +102,14 @@ abstract class Town implements _i1.SerializableModel {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (district != null) 'district': district,
+      if (districtId != null) 'districtId': districtId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -119,8 +117,7 @@ abstract class Town implements _i1.SerializableModel {
       if (latitude != null) 'latitude': latitude,
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
-      if (area != null) 'area': area,
-      if (timezone != null) 'timezone': timezone,
+      if (district != null) 'district': district?.toJson(),
     };
   }
 
@@ -136,7 +133,7 @@ class _TownImpl extends Town {
   _TownImpl({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -144,12 +141,11 @@ class _TownImpl extends Town {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   }) : super._(
           id: id,
           name: name,
-          district: district,
+          districtId: districtId,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
@@ -157,15 +153,14 @@ class _TownImpl extends Town {
           latitude: latitude,
           longitude: longitude,
           population: population,
-          area: area,
-          timezone: timezone,
+          district: district,
         );
 
   @override
   Town copyWith({
     Object? id = _Undefined,
     Object? name = _Undefined,
-    Object? district = _Undefined,
+    Object? districtId = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
@@ -173,13 +168,12 @@ class _TownImpl extends Town {
     Object? latitude = _Undefined,
     Object? longitude = _Undefined,
     Object? population = _Undefined,
-    Object? area = _Undefined,
-    Object? timezone = _Undefined,
+    Object? district = _Undefined,
   }) {
     return Town(
       id: id is int? ? id : this.id,
       name: name is String? ? name : this.name,
-      district: district is int? ? district : this.district,
+      districtId: districtId is int? ? districtId : this.districtId,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
@@ -187,8 +181,8 @@ class _TownImpl extends Town {
       latitude: latitude is double? ? latitude : this.latitude,
       longitude: longitude is double? ? longitude : this.longitude,
       population: population is int? ? population : this.population,
-      area: area is double? ? area : this.area,
-      timezone: timezone is String? ? timezone : this.timezone,
+      district:
+          district is _i2.District? ? district : this.district?.copyWith(),
     );
   }
 }

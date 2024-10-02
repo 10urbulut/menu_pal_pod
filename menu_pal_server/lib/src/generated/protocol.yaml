@@ -1,5 +1,6 @@
 cities:
   - getAllCities:
+  - getCitiesByCountry:
   - getCity:
   - addCity:
   - deleteCity:
@@ -12,6 +13,7 @@ countries:
   - updateCountry:
 districts:
   - getAllDistricts:
+  - getDistrictsByCity:
   - getDistrict:
   - addDistrict:
   - deleteDistrict:
@@ -26,5 +28,12 @@ menus:
   - addMenu:
   - deleteMenu:
   - getAllMenus:
+towns:
+  - getAllTowns:
+  - getTownsByDistrict:
+  - getTown:
+  - addTown:
+  - deleteTown:
+  - updateTown:
 workPlace:
   - workHere:

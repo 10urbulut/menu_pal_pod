@@ -19,12 +19,14 @@ import 'example.dart' as _i6;
 import 'menu.dart' as _i7;
 import 'menu_type.dart' as _i8;
 import 'town.dart' as _i9;
-import 'package:menu_pal_client/src/protocol/city.dart' as _i10;
-import 'package:menu_pal_client/src/protocol/country.dart' as _i11;
-import 'package:menu_pal_client/src/protocol/district.dart' as _i12;
-import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i13;
-import 'package:menu_pal_client/src/protocol/menu.dart' as _i14;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i15;
+import 'protocol.dart' as _i10;
+import 'package:menu_pal_client/src/protocol/city.dart' as _i11;
+import 'package:menu_pal_client/src/protocol/country.dart' as _i12;
+import 'package:menu_pal_client/src/protocol/district.dart' as _i13;
+import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i14;
+import 'package:menu_pal_client/src/protocol/menu.dart' as _i15;
+import 'package:menu_pal_client/src/protocol/town.dart' as _i16;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i17;
 export 'address.dart';
 export 'city.dart';
 export 'country.dart';
@@ -96,33 +98,52 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i9.Town?>()) {
       return (data != null ? _i9.Town.fromJson(data) : null) as T;
     }
+    if (t == _i1.getType<List<_i10.District>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.District>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.City>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.City>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Town>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Town>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i10.City>) {
-      return (data as List).map((e) => deserialize<_i10.City>(e)).toList()
+    if (t == List<_i11.City>) {
+      return (data as List).map((e) => deserialize<_i11.City>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i11.Country>) {
-      return (data as List).map((e) => deserialize<_i11.Country>(e)).toList()
+    if (t == List<_i12.Country>) {
+      return (data as List).map((e) => deserialize<_i12.Country>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.District>) {
-      return (data as List).map((e) => deserialize<_i12.District>(e)).toList()
+    if (t == List<_i13.District>) {
+      return (data as List).map((e) => deserialize<_i13.District>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.MenuType>) {
-      return (data as List).map((e) => deserialize<_i13.MenuType>(e)).toList()
+    if (t == List<_i14.MenuType>) {
+      return (data as List).map((e) => deserialize<_i14.MenuType>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.Menu>) {
-      return (data as List).map((e) => deserialize<_i14.Menu>(e)).toList()
+    if (t == List<_i15.Menu>) {
+      return (data as List).map((e) => deserialize<_i15.Menu>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i16.Town>) {
+      return (data as List).map((e) => deserialize<_i16.Town>(e)).toList()
           as dynamic;
     }
     try {
-      return _i15.Protocol().deserialize<T>(data, t);
+      return _i17.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -155,7 +176,7 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i9.Town) {
       return 'Town';
     }
-    className = _i15.Protocol().getClassNameForObject(data);
+    className = _i17.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -190,7 +211,7 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i15.Protocol().deserializeByClassName(data);
+      return _i17.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

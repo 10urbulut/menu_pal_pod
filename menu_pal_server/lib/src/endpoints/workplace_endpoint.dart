@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:menu_pal_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 
@@ -18,5 +19,40 @@ class WorkPlaceEndpoint extends Endpoint {
   // passwords, and information about the request being made to the server.
   Future<void> workHere(Session session, String name) async {
     print("workHere worked");
+    return;
+    //////////////////////----------------////////////////////
+    ///
+    ///
+    var response =
+        await Dio().get("https://turkiyeapi.dev/api/v1/neighborhoods");
+    if (response.statusCode != 200) {
+      print("Error: ${response.statusCode}");
+      return;
+    }
+    final takenTowns = response.data["data"];
+    List<District> districts = await District.db.find(session);
+
+    for (var district in districts) {
+      print("District: ${district.name}");
+      List<Town> towns = [];
+      for (var takenTown in takenTowns) {
+        if (district.name == takenTown["district"]) {
+          towns.add(
+            Town(
+              districtId: district.id,
+              name: takenTown["name"],
+              population: takenTown["population"],
+              createdAt: DateTime.now().toUtc(),
+              createdBy: "Onur",
+            ),
+          );
+          print("Town added: ${towns.last.name}");
+        }
+      }
+      await Town.db.insert(session, towns);
+      print("Towns added: ${towns.length}");
+    }
+
+    //////////////////////----------------////////////////////
   }
 }

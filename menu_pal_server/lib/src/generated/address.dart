@@ -11,10 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Address extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
   Address._({
-    int? id,
+    this.id,
     this.street,
     this.city,
     this.town,
@@ -28,7 +27,7 @@ abstract class Address extends _i1.TableRow
     this.longitude,
     this.population,
     this.area,
-  }) : super(id);
+  });
 
   factory Address({
     int? id,
@@ -75,6 +74,9 @@ abstract class Address extends _i1.TableRow
   static final t = AddressTable();
 
   static const db = AddressRepository._();
+
+  @override
+  int? id;
 
   String? street;
 

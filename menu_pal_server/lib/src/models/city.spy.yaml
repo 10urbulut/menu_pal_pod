@@ -2,7 +2,7 @@ class: City
 table: city
 fields:
   name: String?
-  country: int?
+  countryId: int?
   createdAt: DateTime?
   updatedAt: DateTime?
   deletedAt: DateTime?
@@ -13,3 +13,5 @@ fields:
   area: double?
   currency: String?
   timezone: String?
+  districts: List<District>?, relation(name = district_city)
+  country: Country?, relation(name = city_country, field=countryId)

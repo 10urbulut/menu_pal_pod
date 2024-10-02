@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Country implements _i1.SerializableModel {
   Country._({
@@ -25,6 +26,7 @@ abstract class Country implements _i1.SerializableModel {
     this.area,
     this.currency,
     this.timezone,
+    this.cities,
   });
 
   factory Country({
@@ -40,6 +42,7 @@ abstract class Country implements _i1.SerializableModel {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   }) = _CountryImpl;
 
   factory Country.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -62,6 +65,9 @@ abstract class Country implements _i1.SerializableModel {
       area: (jsonSerialization['area'] as num?)?.toDouble(),
       currency: jsonSerialization['currency'] as String?,
       timezone: jsonSerialization['timezone'] as String?,
+      cities: (jsonSerialization['cities'] as List?)
+          ?.map((e) => _i2.City.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -92,6 +98,8 @@ abstract class Country implements _i1.SerializableModel {
 
   String? timezone;
 
+  List<_i2.City>? cities;
+
   Country copyWith({
     int? id,
     String? name,
@@ -105,6 +113,7 @@ abstract class Country implements _i1.SerializableModel {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -121,6 +130,8 @@ abstract class Country implements _i1.SerializableModel {
       if (area != null) 'area': area,
       if (currency != null) 'currency': currency,
       if (timezone != null) 'timezone': timezone,
+      if (cities != null)
+        'cities': cities?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -146,6 +157,7 @@ class _CountryImpl extends Country {
     double? area,
     String? currency,
     String? timezone,
+    List<_i2.City>? cities,
   }) : super._(
           id: id,
           name: name,
@@ -159,6 +171,7 @@ class _CountryImpl extends Country {
           area: area,
           currency: currency,
           timezone: timezone,
+          cities: cities,
         );
 
   @override
@@ -175,6 +188,7 @@ class _CountryImpl extends Country {
     Object? area = _Undefined,
     Object? currency = _Undefined,
     Object? timezone = _Undefined,
+    Object? cities = _Undefined,
   }) {
     return Country(
       id: id is int? ? id : this.id,
@@ -189,6 +203,9 @@ class _CountryImpl extends Country {
       area: area is double? ? area : this.area,
       currency: currency is String? ? currency : this.currency,
       timezone: timezone is String? ? timezone : this.timezone,
+      cities: cities is List<_i2.City>?
+          ? cities
+          : this.cities?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

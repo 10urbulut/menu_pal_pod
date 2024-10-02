@@ -10,12 +10,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'protocol.dart' as _i2;
 
-abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
+abstract class Town implements _i1.TableRow, _i1.ProtocolSerialization {
   Town._({
-    int? id,
+    this.id,
     this.name,
-    this.district,
+    this.districtId,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -23,14 +24,13 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
     this.latitude,
     this.longitude,
     this.population,
-    this.area,
-    this.timezone,
-  }) : super(id);
+    this.district,
+  });
 
   factory Town({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -38,15 +38,14 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   }) = _TownImpl;
 
   factory Town.fromJson(Map<String, dynamic> jsonSerialization) {
     return Town(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String?,
-      district: jsonSerialization['district'] as int?,
+      districtId: jsonSerialization['districtId'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -60,8 +59,10 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
       latitude: (jsonSerialization['latitude'] as num?)?.toDouble(),
       longitude: (jsonSerialization['longitude'] as num?)?.toDouble(),
       population: jsonSerialization['population'] as int?,
-      area: (jsonSerialization['area'] as num?)?.toDouble(),
-      timezone: jsonSerialization['timezone'] as String?,
+      district: jsonSerialization['district'] == null
+          ? null
+          : _i2.District.fromJson(
+              (jsonSerialization['district'] as Map<String, dynamic>)),
     );
   }
 
@@ -69,9 +70,12 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   static const db = TownRepository._();
 
+  @override
+  int? id;
+
   String? name;
 
-  int? district;
+  int? districtId;
 
   DateTime? createdAt;
 
@@ -87,9 +91,7 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   int? population;
 
-  double? area;
-
-  String? timezone;
+  _i2.District? district;
 
   @override
   _i1.Table get table => t;
@@ -97,7 +99,7 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
   Town copyWith({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -105,15 +107,14 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (district != null) 'district': district,
+      if (districtId != null) 'districtId': districtId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -121,8 +122,7 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
       if (latitude != null) 'latitude': latitude,
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
-      if (area != null) 'area': area,
-      if (timezone != null) 'timezone': timezone,
+      if (district != null) 'district': district?.toJson(),
     };
   }
 
@@ -131,7 +131,7 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (district != null) 'district': district,
+      if (districtId != null) 'districtId': districtId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -139,13 +139,12 @@ abstract class Town extends _i1.TableRow implements _i1.ProtocolSerialization {
       if (latitude != null) 'latitude': latitude,
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
-      if (area != null) 'area': area,
-      if (timezone != null) 'timezone': timezone,
+      if (district != null) 'district': district?.toJsonForProtocol(),
     };
   }
 
-  static TownInclude include() {
-    return TownInclude._();
+  static TownInclude include({_i2.DistrictInclude? district}) {
+    return TownInclude._(district: district);
   }
 
   static TownIncludeList includeList({
@@ -180,7 +179,7 @@ class _TownImpl extends Town {
   _TownImpl({
     int? id,
     String? name,
-    int? district,
+    int? districtId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -188,12 +187,11 @@ class _TownImpl extends Town {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
-    String? timezone,
+    _i2.District? district,
   }) : super._(
           id: id,
           name: name,
-          district: district,
+          districtId: districtId,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
@@ -201,15 +199,14 @@ class _TownImpl extends Town {
           latitude: latitude,
           longitude: longitude,
           population: population,
-          area: area,
-          timezone: timezone,
+          district: district,
         );
 
   @override
   Town copyWith({
     Object? id = _Undefined,
     Object? name = _Undefined,
-    Object? district = _Undefined,
+    Object? districtId = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
@@ -217,13 +214,12 @@ class _TownImpl extends Town {
     Object? latitude = _Undefined,
     Object? longitude = _Undefined,
     Object? population = _Undefined,
-    Object? area = _Undefined,
-    Object? timezone = _Undefined,
+    Object? district = _Undefined,
   }) {
     return Town(
       id: id is int? ? id : this.id,
       name: name is String? ? name : this.name,
-      district: district is int? ? district : this.district,
+      districtId: districtId is int? ? districtId : this.districtId,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
@@ -231,8 +227,8 @@ class _TownImpl extends Town {
       latitude: latitude is double? ? latitude : this.latitude,
       longitude: longitude is double? ? longitude : this.longitude,
       population: population is int? ? population : this.population,
-      area: area is double? ? area : this.area,
-      timezone: timezone is String? ? timezone : this.timezone,
+      district:
+          district is _i2.District? ? district : this.district?.copyWith(),
     );
   }
 }
@@ -243,8 +239,8 @@ class TownTable extends _i1.Table {
       'name',
       this,
     );
-    district = _i1.ColumnInt(
-      'district',
+    districtId = _i1.ColumnInt(
+      'districtId',
       this,
     );
     createdAt = _i1.ColumnDateTime(
@@ -275,19 +271,11 @@ class TownTable extends _i1.Table {
       'population',
       this,
     );
-    area = _i1.ColumnDouble(
-      'area',
-      this,
-    );
-    timezone = _i1.ColumnString(
-      'timezone',
-      this,
-    );
   }
 
   late final _i1.ColumnString name;
 
-  late final _i1.ColumnInt district;
+  late final _i1.ColumnInt districtId;
 
   late final _i1.ColumnDateTime createdAt;
 
@@ -303,15 +291,26 @@ class TownTable extends _i1.Table {
 
   late final _i1.ColumnInt population;
 
-  late final _i1.ColumnDouble area;
+  _i2.DistrictTable? _district;
 
-  late final _i1.ColumnString timezone;
+  _i2.DistrictTable get district {
+    if (_district != null) return _district!;
+    _district = _i1.createRelationTable(
+      relationFieldName: 'district',
+      field: Town.t.districtId,
+      foreignField: _i2.District.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.DistrictTable(tableRelation: foreignTableRelation),
+    );
+    return _district!;
+  }
 
   @override
   List<_i1.Column> get columns => [
         id,
         name,
-        district,
+        districtId,
         createdAt,
         updatedAt,
         deletedAt,
@@ -319,16 +318,26 @@ class TownTable extends _i1.Table {
         latitude,
         longitude,
         population,
-        area,
-        timezone,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'district') {
+      return district;
+    }
+    return null;
+  }
 }
 
 class TownInclude extends _i1.IncludeObject {
-  TownInclude._();
+  TownInclude._({_i2.DistrictInclude? district}) {
+    _district = district;
+  }
+
+  _i2.DistrictInclude? _district;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'district': _district};
 
   @override
   _i1.Table get table => Town.t;
@@ -357,6 +366,10 @@ class TownIncludeList extends _i1.IncludeList {
 class TownRepository {
   const TownRepository._();
 
+  final attachRow = const TownAttachRowRepository._();
+
+  final detachRow = const TownDetachRowRepository._();
+
   Future<List<Town>> find(
     _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<TownTable>? where,
@@ -366,6 +379,7 @@ class TownRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<TownTable>? orderByList,
     _i1.Transaction? transaction,
+    TownInclude? include,
   }) async {
     return databaseAccessor.db.find<Town>(
       where: where?.call(Town.t),
@@ -375,6 +389,7 @@ class TownRepository {
       limit: limit,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -386,6 +401,7 @@ class TownRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<TownTable>? orderByList,
     _i1.Transaction? transaction,
+    TownInclude? include,
   }) async {
     return databaseAccessor.db.findFirstRow<Town>(
       where: where?.call(Town.t),
@@ -394,6 +410,7 @@ class TownRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -401,10 +418,12 @@ class TownRepository {
     _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
+    TownInclude? include,
   }) async {
     return databaseAccessor.db.findById<Town>(
       id,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -498,6 +517,52 @@ class TownRepository {
     return databaseAccessor.db.count<Town>(
       where: where?.call(Town.t),
       limit: limit,
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class TownAttachRowRepository {
+  const TownAttachRowRepository._();
+
+  Future<void> district(
+    _i1.DatabaseAccessor databaseAccessor,
+    Town town,
+    _i2.District district, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (town.id == null) {
+      throw ArgumentError.notNull('town.id');
+    }
+    if (district.id == null) {
+      throw ArgumentError.notNull('district.id');
+    }
+
+    var $town = town.copyWith(districtId: district.id);
+    await databaseAccessor.db.updateRow<Town>(
+      $town,
+      columns: [Town.t.districtId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class TownDetachRowRepository {
+  const TownDetachRowRepository._();
+
+  Future<void> district(
+    _i1.DatabaseAccessor databaseAccessor,
+    Town town, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (town.id == null) {
+      throw ArgumentError.notNull('town.id');
+    }
+
+    var $town = town.copyWith(districtId: null);
+    await databaseAccessor.db.updateRow<Town>(
+      $town,
+      columns: [Town.t.districtId],
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
