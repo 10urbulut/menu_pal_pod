@@ -1,0 +1,99 @@
+name: menu_pal
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Fonts
+  google_fonts: ^6.1.0
+
+  bubble: ^1.2.1
+
+  # Network
+  dio: ^5.3.3
+
+  # State Management
+  provider: ^6.0.5
+
+  # Page/Screen Navigator
+  auto_route: ^7.8.4
+
+  get: ^4.6.1
+  get_it: ^7.2.0
+  injectable: ^2.3.2
+
+  animations: ^2.0.3
+
+  image_provider:
+    path: /Users/onurbulut/Projects/flutter_projects/image_provider
+    # git:
+    #   url: https://github.com/CosmosExmo/image_provider.git
+
+  # focused_image_widget:
+  #   git:
+  #     url: https://github.com/10urbulut/focused_image_widget.git
+
+  # dialog_service:
+  #   git:
+  #     url: https://github.com/CosmosExmo/dialog_service.git
+
+  flare_flutter: ^3.0.2
+  flutter_easyloading: ^3.0.5
+  dio_cache_interceptor: ^3.5.0
+  awesome_dio_interceptor: ^1.1.0
+  change_case: ^2.0.1
+  flutter_lints: ^4.0.0
+
+  json_annotation: ^4.9.0
+
+  # QR Code Scanner
+  qr_code_scanner: ^0.4.0
+
+  # WebView Shower
+  webview_flutter: ^4.9.0
+
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  firebase_messaging: ^15.1.3
+
+  # Serverpod
+  serverpod_flutter: 2.1.3
+  menu_pal_client:
+    path: ../menu_pal_client
+  serverpod_auth_email_flutter: 2.1.3
+  serverpod_auth_shared_flutter: 2.1.3
+
+  #  Location
+  geolocator: ^13.0.1
+
+  permission_handler: ^11.3.1
+  dropdown_search: ^6.0.1
+  font_awesome_flutter: ^10.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # Generator Starter
+  build_runner: ^2.1.5
+  # Code Generators
+  auto_route_generator: ^7.3.2
+  injectable_generator: ^2.4.1
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/

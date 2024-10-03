@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876454931653",
+    "project_id": "menupal-dee10",
+    "storage_bucket": "menupal-dee10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876454931653:android:073f019fc1db8d0594d4ac",
+        "android_client_info": {
+          "package_name": "dev.onurbulut.menu_pal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8DLEvRDIcStQ3_v-lPcQH8hDfw7TlUXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

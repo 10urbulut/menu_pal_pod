@@ -1,0 +1,25 @@
+{
+	// Generate view and view model classes
+	"Create viewModel class": {
+		"scope": "dart,flutter",
+		"prefix": "viewModelClass",
+		"body": [
+			"import '../../app/blueprints/base_viewmodel.dart';",
+			"import '../../app/app_defaults.dart';",
+
+			"class $1ViewModel extends BaseViewModel {",
+			 " @override",
+			  "void disposeModel() {}",
+			
+			  "@override",
+			  "Future<void> getData() async {",
+				"await Future.delayed(AppDefaults.kStandartDuration);",
+				"setViewDidLoad(true);",
+			  "}",
+			"}",
+			
+		],
+		"description": "Log output to console"
+	}
+
+}

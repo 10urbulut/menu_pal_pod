@@ -1,0 +1,41 @@
+{
+	"Create view class": {
+		"scope": "dart,flutter",
+		"prefix": "viewClass",
+		"body": [
+			"import 'package:flutter/material.dart';",
+			"import 'package:provider/provider.dart';",
+			"import 'package:auto_route/auto_route.dart';",
+			"import '../../app/blueprints/base_page_view.dart';",
+
+			"@RoutePage",
+			"class $1View extends StatelessWidget {",
+			 " const $1View({super.key});",
+			
+			"  @override",
+			 " Widget build(BuildContext context) {",
+				"return ChangeNotifierProvider(",
+				 " create: (context) => $1ViewModel(),",
+				 " builder: (context, _) {",
+					"return const BasePageView<$1ViewModel>(",
+					  "content: _ViewContent(),",
+					");",
+				 " },",
+				");",
+			  "}",
+			"}",
+			
+			"class _ViewContent extends StatelessWidget {",
+			  "const _ViewContent();",
+			
+			 " @override",
+			 " Widget build(BuildContext context) {",
+				"return Container();",
+			  "}",
+			"}"
+			
+			
+		],
+		"description": "View class code generator"
+	}
+}
