@@ -17,14 +17,14 @@ import 'country.dart' as _i4;
 import 'district.dart' as _i5;
 import 'example.dart' as _i6;
 import 'menu.dart' as _i7;
-import 'menu_type.dart' as _i8;
+import 'restaurant_type.dart' as _i8;
 import 'town.dart' as _i9;
 import 'protocol.dart' as _i10;
 import 'package:menu_pal_client/src/protocol/city.dart' as _i11;
 import 'package:menu_pal_client/src/protocol/country.dart' as _i12;
 import 'package:menu_pal_client/src/protocol/district.dart' as _i13;
-import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i14;
-import 'package:menu_pal_client/src/protocol/menu.dart' as _i15;
+import 'package:menu_pal_client/src/protocol/menu.dart' as _i14;
+import 'package:menu_pal_client/src/protocol/restaurant_type.dart' as _i15;
 import 'package:menu_pal_client/src/protocol/town.dart' as _i16;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i17;
 export 'address.dart';
@@ -33,7 +33,7 @@ export 'country.dart';
 export 'district.dart';
 export 'example.dart';
 export 'menu.dart';
-export 'menu_type.dart';
+export 'restaurant_type.dart';
 export 'town.dart';
 export 'client.dart';
 
@@ -68,8 +68,8 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i7.Menu) {
       return _i7.Menu.fromJson(data) as T;
     }
-    if (t == _i8.MenuType) {
-      return _i8.MenuType.fromJson(data) as T;
+    if (t == _i8.RestaurantType) {
+      return _i8.RestaurantType.fromJson(data) as T;
     }
     if (t == _i9.Town) {
       return _i9.Town.fromJson(data) as T;
@@ -92,8 +92,8 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i7.Menu?>()) {
       return (data != null ? _i7.Menu.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i8.MenuType?>()) {
-      return (data != null ? _i8.MenuType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.RestaurantType?>()) {
+      return (data != null ? _i8.RestaurantType.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i9.Town?>()) {
       return (data != null ? _i9.Town.fromJson(data) : null) as T;
@@ -113,9 +113,26 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<_i10.Town>(e)).toList()
           : null) as dynamic;
     }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Address>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Address>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.RestaurantType>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i10.RestaurantType>(e))
+              .toList()
           : null) as dynamic;
     }
     if (t == List<_i11.City>) {
@@ -130,13 +147,14 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i13.District>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.MenuType>) {
-      return (data as List).map((e) => deserialize<_i14.MenuType>(e)).toList()
+    if (t == List<_i14.Menu>) {
+      return (data as List).map((e) => deserialize<_i14.Menu>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i15.Menu>) {
-      return (data as List).map((e) => deserialize<_i15.Menu>(e)).toList()
-          as dynamic;
+    if (t == List<_i15.RestaurantType>) {
+      return (data as List)
+          .map((e) => deserialize<_i15.RestaurantType>(e))
+          .toList() as dynamic;
     }
     if (t == List<_i16.Town>) {
       return (data as List).map((e) => deserialize<_i16.Town>(e)).toList()
@@ -170,8 +188,8 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i7.Menu) {
       return 'Menu';
     }
-    if (data is _i8.MenuType) {
-      return 'MenuType';
+    if (data is _i8.RestaurantType) {
+      return 'RestaurantType';
     }
     if (data is _i9.Town) {
       return 'Town';
@@ -203,8 +221,8 @@ class Protocol extends _i1.SerializationManager {
     if (data['className'] == 'Menu') {
       return deserialize<_i7.Menu>(data['data']);
     }
-    if (data['className'] == 'MenuType') {
-      return deserialize<_i8.MenuType>(data['data']);
+    if (data['className'] == 'RestaurantType') {
+      return deserialize<_i8.RestaurantType>(data['data']);
     }
     if (data['className'] == 'Town') {
       return deserialize<_i9.Town>(data['data']);

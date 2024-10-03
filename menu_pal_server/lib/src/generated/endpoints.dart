@@ -13,15 +13,15 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/cities_endpoint.dart' as _i2;
 import '../endpoints/countries_endpoint.dart' as _i3;
 import '../endpoints/districts_endpoint.dart' as _i4;
-import '../endpoints/menu_types_endpoint.dart' as _i5;
-import '../endpoints/menus_endpoint.dart' as _i6;
+import '../endpoints/menus_endpoint.dart' as _i5;
+import '../endpoints/restaurant_types_endpoint.dart' as _i6;
 import '../endpoints/towns_endpoint.dart' as _i7;
 import '../endpoints/workplace_endpoint.dart' as _i8;
 import 'package:menu_pal_server/src/generated/city.dart' as _i9;
 import 'package:menu_pal_server/src/generated/country.dart' as _i10;
 import 'package:menu_pal_server/src/generated/district.dart' as _i11;
-import 'package:menu_pal_server/src/generated/menu_type.dart' as _i12;
-import 'package:menu_pal_server/src/generated/menu.dart' as _i13;
+import 'package:menu_pal_server/src/generated/menu.dart' as _i12;
+import 'package:menu_pal_server/src/generated/restaurant_type.dart' as _i13;
 import 'package:menu_pal_server/src/generated/town.dart' as _i14;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i15;
 
@@ -47,16 +47,16 @@ class Endpoints extends _i1.EndpointDispatch {
           'districts',
           null,
         ),
-      'menuTypes': _i5.MenuTypesEndpoint()
-        ..initialize(
-          server,
-          'menuTypes',
-          null,
-        ),
-      'menus': _i6.MenusEndpoint()
+      'menus': _i5.MenusEndpoint()
         ..initialize(
           server,
           'menus',
+          null,
+        ),
+      'restaurantTypes': _i6.RestaurantTypesEndpoint()
+        ..initialize(
+          server,
+          'restaurantTypes',
           null,
         ),
       'towns': _i7.TownsEndpoint()
@@ -372,94 +372,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    connectors['menuTypes'] = _i1.EndpointConnector(
-      name: 'menuTypes',
-      endpoint: endpoints['menuTypes']!,
-      methodConnectors: {
-        'getAllMenuTypes': _i1.MethodConnector(
-          name: 'getAllMenuTypes',
-          params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['menuTypes'] as _i5.MenuTypesEndpoint)
-                  .getAllMenuTypes(session),
-        ),
-        'getMenuType': _i1.MethodConnector(
-          name: 'getMenuType',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['menuTypes'] as _i5.MenuTypesEndpoint).getMenuType(
-            session,
-            params['id'],
-          ),
-        ),
-        'addMenuType': _i1.MethodConnector(
-          name: 'addMenuType',
-          params: {
-            'menuType': _i1.ParameterDescription(
-              name: 'menuType',
-              type: _i1.getType<_i12.MenuType>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['menuTypes'] as _i5.MenuTypesEndpoint).addMenuType(
-            session,
-            params['menuType'],
-          ),
-        ),
-        'deleteMenuType': _i1.MethodConnector(
-          name: 'deleteMenuType',
-          params: {
-            'menuType': _i1.ParameterDescription(
-              name: 'menuType',
-              type: _i1.getType<_i12.MenuType>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['menuTypes'] as _i5.MenuTypesEndpoint).deleteMenuType(
-            session,
-            params['menuType'],
-          ),
-        ),
-        'updateMenuType': _i1.MethodConnector(
-          name: 'updateMenuType',
-          params: {
-            'menuType': _i1.ParameterDescription(
-              name: 'menuType',
-              type: _i1.getType<_i12.MenuType>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['menuTypes'] as _i5.MenuTypesEndpoint).updateMenuType(
-            session,
-            params['menuType'],
-          ),
-        ),
-      },
-    );
     connectors['menus'] = _i1.EndpointConnector(
       name: 'menus',
       endpoint: endpoints['menus']!,
@@ -469,7 +381,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'menu': _i1.ParameterDescription(
               name: 'menu',
-              type: _i1.getType<_i13.Menu>(),
+              type: _i1.getType<_i12.Menu>(),
               nullable: false,
             )
           },
@@ -477,7 +389,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['menus'] as _i6.MenusEndpoint).addMenu(
+              (endpoints['menus'] as _i5.MenusEndpoint).addMenu(
             session,
             params['menu'],
           ),
@@ -487,7 +399,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'menu': _i1.ParameterDescription(
               name: 'menu',
-              type: _i1.getType<_i13.Menu>(),
+              type: _i1.getType<_i12.Menu>(),
               nullable: false,
             )
           },
@@ -495,7 +407,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['menus'] as _i6.MenusEndpoint).deleteMenu(
+              (endpoints['menus'] as _i5.MenusEndpoint).deleteMenu(
             session,
             params['menu'],
           ),
@@ -507,7 +419,99 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['menus'] as _i6.MenusEndpoint).getAllMenus(session),
+              (endpoints['menus'] as _i5.MenusEndpoint).getAllMenus(session),
+        ),
+      },
+    );
+    connectors['restaurantTypes'] = _i1.EndpointConnector(
+      name: 'restaurantTypes',
+      endpoint: endpoints['restaurantTypes']!,
+      methodConnectors: {
+        'getAllRestaurantTypes': _i1.MethodConnector(
+          name: 'getAllRestaurantTypes',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['restaurantTypes'] as _i6.RestaurantTypesEndpoint)
+                  .getAllRestaurantTypes(session),
+        ),
+        'getRestaurantType': _i1.MethodConnector(
+          name: 'getRestaurantType',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['restaurantTypes'] as _i6.RestaurantTypesEndpoint)
+                  .getRestaurantType(
+            session,
+            params['id'],
+          ),
+        ),
+        'addRestaurantType': _i1.MethodConnector(
+          name: 'addRestaurantType',
+          params: {
+            'value': _i1.ParameterDescription(
+              name: 'value',
+              type: _i1.getType<_i13.RestaurantType>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['restaurantTypes'] as _i6.RestaurantTypesEndpoint)
+                  .addRestaurantType(
+            session,
+            params['value'],
+          ),
+        ),
+        'deleteRestaurantType': _i1.MethodConnector(
+          name: 'deleteRestaurantType',
+          params: {
+            'value': _i1.ParameterDescription(
+              name: 'value',
+              type: _i1.getType<_i13.RestaurantType>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['restaurantTypes'] as _i6.RestaurantTypesEndpoint)
+                  .deleteRestaurantType(
+            session,
+            params['value'],
+          ),
+        ),
+        'updateRestaurantType': _i1.MethodConnector(
+          name: 'updateRestaurantType',
+          params: {
+            'value': _i1.ParameterDescription(
+              name: 'value',
+              type: _i1.getType<_i13.RestaurantType>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['restaurantTypes'] as _i6.RestaurantTypesEndpoint)
+                  .updateRestaurantType(
+            session,
+            params['value'],
+          ),
         ),
       },
     );

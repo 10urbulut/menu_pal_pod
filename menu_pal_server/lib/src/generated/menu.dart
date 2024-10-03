@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
   Menu._({
@@ -19,20 +20,21 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
     this.thumbnail,
     this.link,
     this.brand,
-    this.type,
+    this.restaurantTypeIds,
     this.star,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
     this.createdBy,
+    this.deletedBy,
     this.city,
     this.country,
     this.category,
     this.tags,
     this.phone,
     this.email,
-    this.website,
-    this.addressId,
+    this.addresses,
+    this.restaurantTypes,
   });
 
   factory Menu({
@@ -42,20 +44,21 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   }) = _MenuImpl;
 
   factory Menu.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -66,7 +69,9 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
       thumbnail: jsonSerialization['thumbnail'] as String?,
       link: jsonSerialization['link'] as String?,
       brand: jsonSerialization['brand'] as String?,
-      type: jsonSerialization['type'] as String?,
+      restaurantTypeIds: (jsonSerialization['restaurantTypeIds'] as List?)
+          ?.map((e) => e as int)
+          .toList(),
       star: jsonSerialization['star'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
@@ -78,6 +83,7 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['deletedAt']),
       createdBy: jsonSerialization['createdBy'] as String?,
+      deletedBy: jsonSerialization['deletedBy'] as String?,
       city: jsonSerialization['city'] as int?,
       country: jsonSerialization['country'] as int?,
       category: jsonSerialization['category'] as int?,
@@ -86,8 +92,12 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
           .toList(),
       phone: jsonSerialization['phone'] as String?,
       email: jsonSerialization['email'] as String?,
-      website: jsonSerialization['website'] as String?,
-      addressId: jsonSerialization['addressId'] as int?,
+      addresses: (jsonSerialization['addresses'] as List?)
+          ?.map((e) => _i2.Address.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      restaurantTypes: (jsonSerialization['restaurantTypes'] as List?)
+          ?.map((e) => _i2.RestaurantType.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -108,7 +118,7 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String? brand;
 
-  String? type;
+  List<int>? restaurantTypeIds;
 
   int? star;
 
@@ -119,6 +129,8 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
   DateTime? deletedAt;
 
   String? createdBy;
+
+  String? deletedBy;
 
   int? city;
 
@@ -132,9 +144,9 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String? email;
 
-  String? website;
+  List<_i2.Address>? addresses;
 
-  int? addressId;
+  List<_i2.RestaurantType>? restaurantTypes;
 
   @override
   _i1.Table get table => t;
@@ -146,20 +158,21 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -170,20 +183,25 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
       if (thumbnail != null) 'thumbnail': thumbnail,
       if (link != null) 'link': link,
       if (brand != null) 'brand': brand,
-      if (type != null) 'type': type,
+      if (restaurantTypeIds != null)
+        'restaurantTypeIds': restaurantTypeIds?.toJson(),
       if (star != null) 'star': star,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
       if (createdBy != null) 'createdBy': createdBy,
+      if (deletedBy != null) 'deletedBy': deletedBy,
       if (city != null) 'city': city,
       if (country != null) 'country': country,
       if (category != null) 'category': category,
       if (tags != null) 'tags': tags?.toJson(),
       if (phone != null) 'phone': phone,
       if (email != null) 'email': email,
-      if (website != null) 'website': website,
-      if (addressId != null) 'addressId': addressId,
+      if (addresses != null)
+        'addresses': addresses?.toJson(valueToJson: (v) => v.toJson()),
+      if (restaurantTypes != null)
+        'restaurantTypes':
+            restaurantTypes?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -196,25 +214,31 @@ abstract class Menu implements _i1.TableRow, _i1.ProtocolSerialization {
       if (thumbnail != null) 'thumbnail': thumbnail,
       if (link != null) 'link': link,
       if (brand != null) 'brand': brand,
-      if (type != null) 'type': type,
+      if (restaurantTypeIds != null)
+        'restaurantTypeIds': restaurantTypeIds?.toJson(),
       if (star != null) 'star': star,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
       if (createdBy != null) 'createdBy': createdBy,
+      if (deletedBy != null) 'deletedBy': deletedBy,
       if (city != null) 'city': city,
       if (country != null) 'country': country,
       if (category != null) 'category': category,
       if (tags != null) 'tags': tags?.toJson(),
       if (phone != null) 'phone': phone,
       if (email != null) 'email': email,
-      if (website != null) 'website': website,
-      if (addressId != null) 'addressId': addressId,
+      if (addresses != null)
+        'addresses':
+            addresses?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
+      if (restaurantTypes != null)
+        'restaurantTypes':
+            restaurantTypes?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
   }
 
-  static MenuInclude include() {
-    return MenuInclude._();
+  static MenuInclude include({_i2.AddressIncludeList? addresses}) {
+    return MenuInclude._(addresses: addresses);
   }
 
   static MenuIncludeList includeList({
@@ -253,20 +277,21 @@ class _MenuImpl extends Menu {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   }) : super._(
           id: id,
           title: title,
@@ -274,20 +299,21 @@ class _MenuImpl extends Menu {
           thumbnail: thumbnail,
           link: link,
           brand: brand,
-          type: type,
+          restaurantTypeIds: restaurantTypeIds,
           star: star,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
           createdBy: createdBy,
+          deletedBy: deletedBy,
           city: city,
           country: country,
           category: category,
           tags: tags,
           phone: phone,
           email: email,
-          website: website,
-          addressId: addressId,
+          addresses: addresses,
+          restaurantTypes: restaurantTypes,
         );
 
   @override
@@ -298,20 +324,21 @@ class _MenuImpl extends Menu {
     Object? thumbnail = _Undefined,
     Object? link = _Undefined,
     Object? brand = _Undefined,
-    Object? type = _Undefined,
+    Object? restaurantTypeIds = _Undefined,
     Object? star = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
     Object? createdBy = _Undefined,
+    Object? deletedBy = _Undefined,
     Object? city = _Undefined,
     Object? country = _Undefined,
     Object? category = _Undefined,
     Object? tags = _Undefined,
     Object? phone = _Undefined,
     Object? email = _Undefined,
-    Object? website = _Undefined,
-    Object? addressId = _Undefined,
+    Object? addresses = _Undefined,
+    Object? restaurantTypes = _Undefined,
   }) {
     return Menu(
       id: id is int? ? id : this.id,
@@ -320,20 +347,27 @@ class _MenuImpl extends Menu {
       thumbnail: thumbnail is String? ? thumbnail : this.thumbnail,
       link: link is String? ? link : this.link,
       brand: brand is String? ? brand : this.brand,
-      type: type is String? ? type : this.type,
+      restaurantTypeIds: restaurantTypeIds is List<int>?
+          ? restaurantTypeIds
+          : this.restaurantTypeIds?.map((e0) => e0).toList(),
       star: star is int? ? star : this.star,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
       createdBy: createdBy is String? ? createdBy : this.createdBy,
+      deletedBy: deletedBy is String? ? deletedBy : this.deletedBy,
       city: city is int? ? city : this.city,
       country: country is int? ? country : this.country,
       category: category is int? ? category : this.category,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
       phone: phone is String? ? phone : this.phone,
       email: email is String? ? email : this.email,
-      website: website is String? ? website : this.website,
-      addressId: addressId is int? ? addressId : this.addressId,
+      addresses: addresses is List<_i2.Address>?
+          ? addresses
+          : this.addresses?.map((e0) => e0.copyWith()).toList(),
+      restaurantTypes: restaurantTypes is List<_i2.RestaurantType>?
+          ? restaurantTypes
+          : this.restaurantTypes?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }
@@ -360,8 +394,8 @@ class MenuTable extends _i1.Table {
       'brand',
       this,
     );
-    type = _i1.ColumnString(
-      'type',
+    restaurantTypeIds = _i1.ColumnSerializable(
+      'restaurantTypeIds',
       this,
     );
     star = _i1.ColumnInt(
@@ -382,6 +416,10 @@ class MenuTable extends _i1.Table {
     );
     createdBy = _i1.ColumnString(
       'createdBy',
+      this,
+    );
+    deletedBy = _i1.ColumnString(
+      'deletedBy',
       this,
     );
     city = _i1.ColumnInt(
@@ -408,12 +446,8 @@ class MenuTable extends _i1.Table {
       'email',
       this,
     );
-    website = _i1.ColumnString(
-      'website',
-      this,
-    );
-    addressId = _i1.ColumnInt(
-      'addressId',
+    restaurantTypes = _i1.ColumnSerializable(
+      'restaurantTypes',
       this,
     );
   }
@@ -428,7 +462,7 @@ class MenuTable extends _i1.Table {
 
   late final _i1.ColumnString brand;
 
-  late final _i1.ColumnString type;
+  late final _i1.ColumnSerializable restaurantTypeIds;
 
   late final _i1.ColumnInt star;
 
@@ -439,6 +473,8 @@ class MenuTable extends _i1.Table {
   late final _i1.ColumnDateTime deletedAt;
 
   late final _i1.ColumnString createdBy;
+
+  late final _i1.ColumnString deletedBy;
 
   late final _i1.ColumnInt city;
 
@@ -452,9 +488,42 @@ class MenuTable extends _i1.Table {
 
   late final _i1.ColumnString email;
 
-  late final _i1.ColumnString website;
+  _i2.AddressTable? ___addresses;
 
-  late final _i1.ColumnInt addressId;
+  _i1.ManyRelation<_i2.AddressTable>? _addresses;
+
+  late final _i1.ColumnSerializable restaurantTypes;
+
+  _i2.AddressTable get __addresses {
+    if (___addresses != null) return ___addresses!;
+    ___addresses = _i1.createRelationTable(
+      relationFieldName: '__addresses',
+      field: Menu.t.id,
+      foreignField: _i2.Address.t.menuId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.AddressTable(tableRelation: foreignTableRelation),
+    );
+    return ___addresses!;
+  }
+
+  _i1.ManyRelation<_i2.AddressTable> get addresses {
+    if (_addresses != null) return _addresses!;
+    var relationTable = _i1.createRelationTable(
+      relationFieldName: 'addresses',
+      field: Menu.t.id,
+      foreignField: _i2.Address.t.menuId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.AddressTable(tableRelation: foreignTableRelation),
+    );
+    _addresses = _i1.ManyRelation<_i2.AddressTable>(
+      tableWithRelations: relationTable,
+      table: _i2.AddressTable(
+          tableRelation: relationTable.tableRelation!.lastRelation),
+    );
+    return _addresses!;
+  }
 
   @override
   List<_i1.Column> get columns => [
@@ -464,28 +533,40 @@ class MenuTable extends _i1.Table {
         thumbnail,
         link,
         brand,
-        type,
+        restaurantTypeIds,
         star,
         createdAt,
         updatedAt,
         deletedAt,
         createdBy,
+        deletedBy,
         city,
         country,
         category,
         tags,
         phone,
         email,
-        website,
-        addressId,
+        restaurantTypes,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'addresses') {
+      return __addresses;
+    }
+    return null;
+  }
 }
 
 class MenuInclude extends _i1.IncludeObject {
-  MenuInclude._();
+  MenuInclude._({_i2.AddressIncludeList? addresses}) {
+    _addresses = addresses;
+  }
+
+  _i2.AddressIncludeList? _addresses;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'addresses': _addresses};
 
   @override
   _i1.Table get table => Menu.t;
@@ -514,6 +595,14 @@ class MenuIncludeList extends _i1.IncludeList {
 class MenuRepository {
   const MenuRepository._();
 
+  final attach = const MenuAttachRepository._();
+
+  final attachRow = const MenuAttachRowRepository._();
+
+  final detach = const MenuDetachRepository._();
+
+  final detachRow = const MenuDetachRowRepository._();
+
   Future<List<Menu>> find(
     _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<MenuTable>? where,
@@ -523,6 +612,7 @@ class MenuRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<MenuTable>? orderByList,
     _i1.Transaction? transaction,
+    MenuInclude? include,
   }) async {
     return databaseAccessor.db.find<Menu>(
       where: where?.call(Menu.t),
@@ -532,6 +622,7 @@ class MenuRepository {
       limit: limit,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -543,6 +634,7 @@ class MenuRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<MenuTable>? orderByList,
     _i1.Transaction? transaction,
+    MenuInclude? include,
   }) async {
     return databaseAccessor.db.findFirstRow<Menu>(
       where: where?.call(Menu.t),
@@ -551,6 +643,7 @@ class MenuRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -558,10 +651,12 @@ class MenuRepository {
     _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
+    MenuInclude? include,
   }) async {
     return databaseAccessor.db.findById<Menu>(
       id,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -655,6 +750,98 @@ class MenuRepository {
     return databaseAccessor.db.count<Menu>(
       where: where?.call(Menu.t),
       limit: limit,
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class MenuAttachRepository {
+  const MenuAttachRepository._();
+
+  Future<void> addresses(
+    _i1.DatabaseAccessor databaseAccessor,
+    Menu menu,
+    List<_i2.Address> address, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('address.id');
+    }
+    if (menu.id == null) {
+      throw ArgumentError.notNull('menu.id');
+    }
+
+    var $address = address.map((e) => e.copyWith(menuId: menu.id)).toList();
+    await databaseAccessor.db.update<_i2.Address>(
+      $address,
+      columns: [_i2.Address.t.menuId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class MenuAttachRowRepository {
+  const MenuAttachRowRepository._();
+
+  Future<void> addresses(
+    _i1.DatabaseAccessor databaseAccessor,
+    Menu menu,
+    _i2.Address address, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.id == null) {
+      throw ArgumentError.notNull('address.id');
+    }
+    if (menu.id == null) {
+      throw ArgumentError.notNull('menu.id');
+    }
+
+    var $address = address.copyWith(menuId: menu.id);
+    await databaseAccessor.db.updateRow<_i2.Address>(
+      $address,
+      columns: [_i2.Address.t.menuId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class MenuDetachRepository {
+  const MenuDetachRepository._();
+
+  Future<void> addresses(
+    _i1.DatabaseAccessor databaseAccessor,
+    List<_i2.Address> address, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('address.id');
+    }
+
+    var $address = address.map((e) => e.copyWith(menuId: null)).toList();
+    await databaseAccessor.db.update<_i2.Address>(
+      $address,
+      columns: [_i2.Address.t.menuId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class MenuDetachRowRepository {
+  const MenuDetachRowRepository._();
+
+  Future<void> addresses(
+    _i1.DatabaseAccessor databaseAccessor,
+    _i2.Address address, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.id == null) {
+      throw ArgumentError.notNull('address.id');
+    }
+
+    var $address = address.copyWith(menuId: null);
+    await databaseAccessor.db.updateRow<_i2.Address>(
+      $address,
+      columns: [_i2.Address.t.menuId],
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }

@@ -11,8 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
-  MenuType._({
+abstract class RestaurantType
+    implements _i1.TableRow, _i1.ProtocolSerialization {
+  RestaurantType._({
     this.id,
     this.name,
     this.description,
@@ -22,7 +23,7 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
     this.createdBy,
   });
 
-  factory MenuType({
+  factory RestaurantType({
     int? id,
     String? name,
     String? description,
@@ -30,10 +31,10 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
-  }) = _MenuTypeImpl;
+  }) = _RestaurantTypeImpl;
 
-  factory MenuType.fromJson(Map<String, dynamic> jsonSerialization) {
-    return MenuType(
+  factory RestaurantType.fromJson(Map<String, dynamic> jsonSerialization) {
+    return RestaurantType(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String?,
       description: jsonSerialization['description'] as String?,
@@ -50,9 +51,9 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
     );
   }
 
-  static final t = MenuTypeTable();
+  static final t = RestaurantTypeTable();
 
-  static const db = MenuTypeRepository._();
+  static const db = RestaurantTypeRepository._();
 
   @override
   int? id;
@@ -72,7 +73,7 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
   @override
   _i1.Table get table => t;
 
-  MenuType copyWith({
+  RestaurantType copyWith({
     int? id,
     String? name,
     String? description,
@@ -107,26 +108,26 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
     };
   }
 
-  static MenuTypeInclude include() {
-    return MenuTypeInclude._();
+  static RestaurantTypeInclude include() {
+    return RestaurantTypeInclude._();
   }
 
-  static MenuTypeIncludeList includeList({
-    _i1.WhereExpressionBuilder<MenuTypeTable>? where,
+  static RestaurantTypeIncludeList includeList({
+    _i1.WhereExpressionBuilder<RestaurantTypeTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<MenuTypeTable>? orderBy,
+    _i1.OrderByBuilder<RestaurantTypeTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MenuTypeTable>? orderByList,
-    MenuTypeInclude? include,
+    _i1.OrderByListBuilder<RestaurantTypeTable>? orderByList,
+    RestaurantTypeInclude? include,
   }) {
-    return MenuTypeIncludeList._(
+    return RestaurantTypeIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(MenuType.t),
+      orderBy: orderBy?.call(RestaurantType.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(MenuType.t),
+      orderByList: orderByList?.call(RestaurantType.t),
       include: include,
     );
   }
@@ -139,8 +140,8 @@ abstract class MenuType implements _i1.TableRow, _i1.ProtocolSerialization {
 
 class _Undefined {}
 
-class _MenuTypeImpl extends MenuType {
-  _MenuTypeImpl({
+class _RestaurantTypeImpl extends RestaurantType {
+  _RestaurantTypeImpl({
     int? id,
     String? name,
     String? description,
@@ -159,7 +160,7 @@ class _MenuTypeImpl extends MenuType {
         );
 
   @override
-  MenuType copyWith({
+  RestaurantType copyWith({
     Object? id = _Undefined,
     Object? name = _Undefined,
     Object? description = _Undefined,
@@ -168,7 +169,7 @@ class _MenuTypeImpl extends MenuType {
     Object? deletedAt = _Undefined,
     Object? createdBy = _Undefined,
   }) {
-    return MenuType(
+    return RestaurantType(
       id: id is int? ? id : this.id,
       name: name is String? ? name : this.name,
       description: description is String? ? description : this.description,
@@ -180,8 +181,9 @@ class _MenuTypeImpl extends MenuType {
   }
 }
 
-class MenuTypeTable extends _i1.Table {
-  MenuTypeTable({super.tableRelation}) : super(tableName: 'menu_type') {
+class RestaurantTypeTable extends _i1.Table {
+  RestaurantTypeTable({super.tableRelation})
+      : super(tableName: 'restaurant_type') {
     name = _i1.ColumnString(
       'name',
       this,
@@ -232,19 +234,19 @@ class MenuTypeTable extends _i1.Table {
       ];
 }
 
-class MenuTypeInclude extends _i1.IncludeObject {
-  MenuTypeInclude._();
+class RestaurantTypeInclude extends _i1.IncludeObject {
+  RestaurantTypeInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => MenuType.t;
+  _i1.Table get table => RestaurantType.t;
 }
 
-class MenuTypeIncludeList extends _i1.IncludeList {
-  MenuTypeIncludeList._({
-    _i1.WhereExpressionBuilder<MenuTypeTable>? where,
+class RestaurantTypeIncludeList extends _i1.IncludeList {
+  RestaurantTypeIncludeList._({
+    _i1.WhereExpressionBuilder<RestaurantTypeTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -252,33 +254,33 @@ class MenuTypeIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(MenuType.t);
+    super.where = where?.call(RestaurantType.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => MenuType.t;
+  _i1.Table get table => RestaurantType.t;
 }
 
-class MenuTypeRepository {
-  const MenuTypeRepository._();
+class RestaurantTypeRepository {
+  const RestaurantTypeRepository._();
 
-  Future<List<MenuType>> find(
+  Future<List<RestaurantType>> find(
     _i1.DatabaseAccessor databaseAccessor, {
-    _i1.WhereExpressionBuilder<MenuTypeTable>? where,
+    _i1.WhereExpressionBuilder<RestaurantTypeTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<MenuTypeTable>? orderBy,
+    _i1.OrderByBuilder<RestaurantTypeTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MenuTypeTable>? orderByList,
+    _i1.OrderByListBuilder<RestaurantTypeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<MenuType>(
-      where: where?.call(MenuType.t),
-      orderBy: orderBy?.call(MenuType.t),
-      orderByList: orderByList?.call(MenuType.t),
+    return databaseAccessor.db.find<RestaurantType>(
+      where: where?.call(RestaurantType.t),
+      orderBy: orderBy?.call(RestaurantType.t),
+      orderByList: orderByList?.call(RestaurantType.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -286,125 +288,125 @@ class MenuTypeRepository {
     );
   }
 
-  Future<MenuType?> findFirstRow(
+  Future<RestaurantType?> findFirstRow(
     _i1.DatabaseAccessor databaseAccessor, {
-    _i1.WhereExpressionBuilder<MenuTypeTable>? where,
+    _i1.WhereExpressionBuilder<RestaurantTypeTable>? where,
     int? offset,
-    _i1.OrderByBuilder<MenuTypeTable>? orderBy,
+    _i1.OrderByBuilder<RestaurantTypeTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MenuTypeTable>? orderByList,
+    _i1.OrderByListBuilder<RestaurantTypeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<MenuType>(
-      where: where?.call(MenuType.t),
-      orderBy: orderBy?.call(MenuType.t),
-      orderByList: orderByList?.call(MenuType.t),
+    return databaseAccessor.db.findFirstRow<RestaurantType>(
+      where: where?.call(RestaurantType.t),
+      orderBy: orderBy?.call(RestaurantType.t),
+      orderByList: orderByList?.call(RestaurantType.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<MenuType?> findById(
+  Future<RestaurantType?> findById(
     _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<MenuType>(
+    return databaseAccessor.db.findById<RestaurantType>(
       id,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<List<MenuType>> insert(
+  Future<List<RestaurantType>> insert(
     _i1.DatabaseAccessor databaseAccessor,
-    List<MenuType> rows, {
+    List<RestaurantType> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<MenuType>(
+    return databaseAccessor.db.insert<RestaurantType>(
       rows,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<MenuType> insertRow(
+  Future<RestaurantType> insertRow(
     _i1.DatabaseAccessor databaseAccessor,
-    MenuType row, {
+    RestaurantType row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<MenuType>(
+    return databaseAccessor.db.insertRow<RestaurantType>(
       row,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<List<MenuType>> update(
+  Future<List<RestaurantType>> update(
     _i1.DatabaseAccessor databaseAccessor,
-    List<MenuType> rows, {
-    _i1.ColumnSelections<MenuTypeTable>? columns,
+    List<RestaurantType> rows, {
+    _i1.ColumnSelections<RestaurantTypeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<MenuType>(
+    return databaseAccessor.db.update<RestaurantType>(
       rows,
-      columns: columns?.call(MenuType.t),
+      columns: columns?.call(RestaurantType.t),
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<MenuType> updateRow(
+  Future<RestaurantType> updateRow(
     _i1.DatabaseAccessor databaseAccessor,
-    MenuType row, {
-    _i1.ColumnSelections<MenuTypeTable>? columns,
+    RestaurantType row, {
+    _i1.ColumnSelections<RestaurantTypeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<MenuType>(
+    return databaseAccessor.db.updateRow<RestaurantType>(
       row,
-      columns: columns?.call(MenuType.t),
+      columns: columns?.call(RestaurantType.t),
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<List<MenuType>> delete(
+  Future<List<RestaurantType>> delete(
     _i1.DatabaseAccessor databaseAccessor,
-    List<MenuType> rows, {
+    List<RestaurantType> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<MenuType>(
+    return databaseAccessor.db.delete<RestaurantType>(
       rows,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<MenuType> deleteRow(
+  Future<RestaurantType> deleteRow(
     _i1.DatabaseAccessor databaseAccessor,
-    MenuType row, {
+    RestaurantType row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<MenuType>(
+    return databaseAccessor.db.deleteRow<RestaurantType>(
       row,
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
-  Future<List<MenuType>> deleteWhere(
+  Future<List<RestaurantType>> deleteWhere(
     _i1.DatabaseAccessor databaseAccessor, {
-    required _i1.WhereExpressionBuilder<MenuTypeTable> where,
+    required _i1.WhereExpressionBuilder<RestaurantTypeTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<MenuType>(
-      where: where(MenuType.t),
+    return databaseAccessor.db.deleteWhere<RestaurantType>(
+      where: where(RestaurantType.t),
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
     _i1.DatabaseAccessor databaseAccessor, {
-    _i1.WhereExpressionBuilder<MenuTypeTable>? where,
+    _i1.WhereExpressionBuilder<RestaurantTypeTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<MenuType>(
-      where: where?.call(MenuType.t),
+    return databaseAccessor.db.count<RestaurantType>(
+      where: where?.call(RestaurantType.t),
       limit: limit,
       transaction: transaction ?? databaseAccessor.transaction,
     );

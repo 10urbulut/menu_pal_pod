@@ -14,3 +14,5 @@ fields:
   longitude: double?
   population: int?
   area: double?
+  menuId: int?
+  menu: Menu?, relation(name = menu_address, field=menuId)

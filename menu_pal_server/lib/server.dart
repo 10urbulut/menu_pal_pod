@@ -41,6 +41,7 @@ void setValidationCodeConfig() {
   auth.AuthConfig.set(auth.AuthConfig(
     sendValidationEmail: (session, email, validationCode) async {
       // print('Validation code: $validationCode');
+
       MailService().sendEmailWithZoho(email, validationCode, "Validation Code");
       return true;
     },

@@ -14,8 +14,8 @@ import 'dart:async' as _i2;
 import 'package:menu_pal_client/src/protocol/city.dart' as _i3;
 import 'package:menu_pal_client/src/protocol/country.dart' as _i4;
 import 'package:menu_pal_client/src/protocol/district.dart' as _i5;
-import 'package:menu_pal_client/src/protocol/menu_type.dart' as _i6;
-import 'package:menu_pal_client/src/protocol/menu.dart' as _i7;
+import 'package:menu_pal_client/src/protocol/menu.dart' as _i6;
+import 'package:menu_pal_client/src/protocol/restaurant_type.dart' as _i7;
 import 'package:menu_pal_client/src/protocol/town.dart' as _i8;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i9;
 import 'protocol.dart' as _i10;
@@ -163,72 +163,74 @@ class EndpointDistricts extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
-class EndpointMenuTypes extends _i1.EndpointRef {
-  EndpointMenuTypes(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'menuTypes';
-
-  _i2.Future<List<_i6.MenuType>> getAllMenuTypes() =>
-      caller.callServerEndpoint<List<_i6.MenuType>>(
-        'menuTypes',
-        'getAllMenuTypes',
-        {},
-      );
-
-  _i2.Future<_i6.MenuType?> getMenuType(int id) =>
-      caller.callServerEndpoint<_i6.MenuType?>(
-        'menuTypes',
-        'getMenuType',
-        {'id': id},
-      );
-
-  _i2.Future<_i6.MenuType> addMenuType(_i6.MenuType menuType) =>
-      caller.callServerEndpoint<_i6.MenuType>(
-        'menuTypes',
-        'addMenuType',
-        {'menuType': menuType},
-      );
-
-  _i2.Future<_i6.MenuType> deleteMenuType(_i6.MenuType menuType) =>
-      caller.callServerEndpoint<_i6.MenuType>(
-        'menuTypes',
-        'deleteMenuType',
-        {'menuType': menuType},
-      );
-
-  _i2.Future<_i6.MenuType> updateMenuType(_i6.MenuType menuType) =>
-      caller.callServerEndpoint<_i6.MenuType>(
-        'menuTypes',
-        'updateMenuType',
-        {'menuType': menuType},
-      );
-}
-
-/// {@category Endpoint}
 class EndpointMenus extends _i1.EndpointRef {
   EndpointMenus(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'menus';
 
-  _i2.Future<void> addMenu(_i7.Menu menu) => caller.callServerEndpoint<void>(
+  _i2.Future<void> addMenu(_i6.Menu menu) => caller.callServerEndpoint<void>(
         'menus',
         'addMenu',
         {'menu': menu},
       );
 
-  _i2.Future<void> deleteMenu(_i7.Menu menu) => caller.callServerEndpoint<void>(
+  _i2.Future<void> deleteMenu(_i6.Menu menu) => caller.callServerEndpoint<void>(
         'menus',
         'deleteMenu',
         {'menu': menu},
       );
 
-  _i2.Future<List<_i7.Menu>> getAllMenus() =>
-      caller.callServerEndpoint<List<_i7.Menu>>(
+  _i2.Future<List<_i6.Menu>> getAllMenus() =>
+      caller.callServerEndpoint<List<_i6.Menu>>(
         'menus',
         'getAllMenus',
         {},
+      );
+}
+
+/// {@category Endpoint}
+class EndpointRestaurantTypes extends _i1.EndpointRef {
+  EndpointRestaurantTypes(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'restaurantTypes';
+
+  _i2.Future<List<_i7.RestaurantType>> getAllRestaurantTypes() =>
+      caller.callServerEndpoint<List<_i7.RestaurantType>>(
+        'restaurantTypes',
+        'getAllRestaurantTypes',
+        {},
+      );
+
+  _i2.Future<_i7.RestaurantType?> getRestaurantType(int id) =>
+      caller.callServerEndpoint<_i7.RestaurantType?>(
+        'restaurantTypes',
+        'getRestaurantType',
+        {'id': id},
+      );
+
+  _i2.Future<_i7.RestaurantType> addRestaurantType(_i7.RestaurantType value) =>
+      caller.callServerEndpoint<_i7.RestaurantType>(
+        'restaurantTypes',
+        'addRestaurantType',
+        {'value': value},
+      );
+
+  _i2.Future<_i7.RestaurantType> deleteRestaurantType(
+          _i7.RestaurantType value) =>
+      caller.callServerEndpoint<_i7.RestaurantType>(
+        'restaurantTypes',
+        'deleteRestaurantType',
+        {'value': value},
+      );
+
+  _i2.Future<_i7.RestaurantType> updateRestaurantType(
+          _i7.RestaurantType value) =>
+      caller.callServerEndpoint<_i7.RestaurantType>(
+        'restaurantTypes',
+        'updateRestaurantType',
+        {'value': value},
       );
 }
 
@@ -332,8 +334,8 @@ class Client extends _i1.ServerpodClientShared {
     cities = EndpointCities(this);
     countries = EndpointCountries(this);
     districts = EndpointDistricts(this);
-    menuTypes = EndpointMenuTypes(this);
     menus = EndpointMenus(this);
+    restaurantTypes = EndpointRestaurantTypes(this);
     towns = EndpointTowns(this);
     workPlace = EndpointWorkPlace(this);
     modules = _Modules(this);
@@ -345,9 +347,9 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointDistricts districts;
 
-  late final EndpointMenuTypes menuTypes;
-
   late final EndpointMenus menus;
+
+  late final EndpointRestaurantTypes restaurantTypes;
 
   late final EndpointTowns towns;
 
@@ -360,8 +362,8 @@ class Client extends _i1.ServerpodClientShared {
         'cities': cities,
         'countries': countries,
         'districts': districts,
-        'menuTypes': menuTypes,
         'menus': menus,
+        'restaurantTypes': restaurantTypes,
         'towns': towns,
         'workPlace': workPlace,
       };

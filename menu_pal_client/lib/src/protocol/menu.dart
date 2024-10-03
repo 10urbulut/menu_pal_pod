@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Menu implements _i1.SerializableModel {
   Menu._({
@@ -19,20 +20,21 @@ abstract class Menu implements _i1.SerializableModel {
     this.thumbnail,
     this.link,
     this.brand,
-    this.type,
+    this.restaurantTypeIds,
     this.star,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
     this.createdBy,
+    this.deletedBy,
     this.city,
     this.country,
     this.category,
     this.tags,
     this.phone,
     this.email,
-    this.website,
-    this.addressId,
+    this.addresses,
+    this.restaurantTypes,
   });
 
   factory Menu({
@@ -42,20 +44,21 @@ abstract class Menu implements _i1.SerializableModel {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   }) = _MenuImpl;
 
   factory Menu.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -66,7 +69,9 @@ abstract class Menu implements _i1.SerializableModel {
       thumbnail: jsonSerialization['thumbnail'] as String?,
       link: jsonSerialization['link'] as String?,
       brand: jsonSerialization['brand'] as String?,
-      type: jsonSerialization['type'] as String?,
+      restaurantTypeIds: (jsonSerialization['restaurantTypeIds'] as List?)
+          ?.map((e) => e as int)
+          .toList(),
       star: jsonSerialization['star'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
@@ -78,6 +83,7 @@ abstract class Menu implements _i1.SerializableModel {
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['deletedAt']),
       createdBy: jsonSerialization['createdBy'] as String?,
+      deletedBy: jsonSerialization['deletedBy'] as String?,
       city: jsonSerialization['city'] as int?,
       country: jsonSerialization['country'] as int?,
       category: jsonSerialization['category'] as int?,
@@ -86,8 +92,12 @@ abstract class Menu implements _i1.SerializableModel {
           .toList(),
       phone: jsonSerialization['phone'] as String?,
       email: jsonSerialization['email'] as String?,
-      website: jsonSerialization['website'] as String?,
-      addressId: jsonSerialization['addressId'] as int?,
+      addresses: (jsonSerialization['addresses'] as List?)
+          ?.map((e) => _i2.Address.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      restaurantTypes: (jsonSerialization['restaurantTypes'] as List?)
+          ?.map((e) => _i2.RestaurantType.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -106,7 +116,7 @@ abstract class Menu implements _i1.SerializableModel {
 
   String? brand;
 
-  String? type;
+  List<int>? restaurantTypeIds;
 
   int? star;
 
@@ -117,6 +127,8 @@ abstract class Menu implements _i1.SerializableModel {
   DateTime? deletedAt;
 
   String? createdBy;
+
+  String? deletedBy;
 
   int? city;
 
@@ -130,9 +142,9 @@ abstract class Menu implements _i1.SerializableModel {
 
   String? email;
 
-  String? website;
+  List<_i2.Address>? addresses;
 
-  int? addressId;
+  List<_i2.RestaurantType>? restaurantTypes;
 
   Menu copyWith({
     int? id,
@@ -141,20 +153,21 @@ abstract class Menu implements _i1.SerializableModel {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -165,20 +178,25 @@ abstract class Menu implements _i1.SerializableModel {
       if (thumbnail != null) 'thumbnail': thumbnail,
       if (link != null) 'link': link,
       if (brand != null) 'brand': brand,
-      if (type != null) 'type': type,
+      if (restaurantTypeIds != null)
+        'restaurantTypeIds': restaurantTypeIds?.toJson(),
       if (star != null) 'star': star,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
       if (createdBy != null) 'createdBy': createdBy,
+      if (deletedBy != null) 'deletedBy': deletedBy,
       if (city != null) 'city': city,
       if (country != null) 'country': country,
       if (category != null) 'category': category,
       if (tags != null) 'tags': tags?.toJson(),
       if (phone != null) 'phone': phone,
       if (email != null) 'email': email,
-      if (website != null) 'website': website,
-      if (addressId != null) 'addressId': addressId,
+      if (addresses != null)
+        'addresses': addresses?.toJson(valueToJson: (v) => v.toJson()),
+      if (restaurantTypes != null)
+        'restaurantTypes':
+            restaurantTypes?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -198,20 +216,21 @@ class _MenuImpl extends Menu {
     String? thumbnail,
     String? link,
     String? brand,
-    String? type,
+    List<int>? restaurantTypeIds,
     int? star,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
+    String? deletedBy,
     int? city,
     int? country,
     int? category,
     List<String>? tags,
     String? phone,
     String? email,
-    String? website,
-    int? addressId,
+    List<_i2.Address>? addresses,
+    List<_i2.RestaurantType>? restaurantTypes,
   }) : super._(
           id: id,
           title: title,
@@ -219,20 +238,21 @@ class _MenuImpl extends Menu {
           thumbnail: thumbnail,
           link: link,
           brand: brand,
-          type: type,
+          restaurantTypeIds: restaurantTypeIds,
           star: star,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
           createdBy: createdBy,
+          deletedBy: deletedBy,
           city: city,
           country: country,
           category: category,
           tags: tags,
           phone: phone,
           email: email,
-          website: website,
-          addressId: addressId,
+          addresses: addresses,
+          restaurantTypes: restaurantTypes,
         );
 
   @override
@@ -243,20 +263,21 @@ class _MenuImpl extends Menu {
     Object? thumbnail = _Undefined,
     Object? link = _Undefined,
     Object? brand = _Undefined,
-    Object? type = _Undefined,
+    Object? restaurantTypeIds = _Undefined,
     Object? star = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
     Object? createdBy = _Undefined,
+    Object? deletedBy = _Undefined,
     Object? city = _Undefined,
     Object? country = _Undefined,
     Object? category = _Undefined,
     Object? tags = _Undefined,
     Object? phone = _Undefined,
     Object? email = _Undefined,
-    Object? website = _Undefined,
-    Object? addressId = _Undefined,
+    Object? addresses = _Undefined,
+    Object? restaurantTypes = _Undefined,
   }) {
     return Menu(
       id: id is int? ? id : this.id,
@@ -265,20 +286,27 @@ class _MenuImpl extends Menu {
       thumbnail: thumbnail is String? ? thumbnail : this.thumbnail,
       link: link is String? ? link : this.link,
       brand: brand is String? ? brand : this.brand,
-      type: type is String? ? type : this.type,
+      restaurantTypeIds: restaurantTypeIds is List<int>?
+          ? restaurantTypeIds
+          : this.restaurantTypeIds?.map((e0) => e0).toList(),
       star: star is int? ? star : this.star,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
       createdBy: createdBy is String? ? createdBy : this.createdBy,
+      deletedBy: deletedBy is String? ? deletedBy : this.deletedBy,
       city: city is int? ? city : this.city,
       country: country is int? ? country : this.country,
       category: category is int? ? category : this.category,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
       phone: phone is String? ? phone : this.phone,
       email: email is String? ? email : this.email,
-      website: website is String? ? website : this.website,
-      addressId: addressId is int? ? addressId : this.addressId,
+      addresses: addresses is List<_i2.Address>?
+          ? addresses
+          : this.addresses?.map((e0) => e0.copyWith()).toList(),
+      restaurantTypes: restaurantTypes is List<_i2.RestaurantType>?
+          ? restaurantTypes
+          : this.restaurantTypes?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

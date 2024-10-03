@@ -18,16 +18,16 @@ districts:
   - addDistrict:
   - deleteDistrict:
   - updateDistrict:
-menuTypes:
-  - getAllMenuTypes:
-  - getMenuType:
-  - addMenuType:
-  - deleteMenuType:
-  - updateMenuType:
 menus:
   - addMenu:
   - deleteMenu:
   - getAllMenus:
+restaurantTypes:
+  - getAllRestaurantTypes:
+  - getRestaurantType:
+  - addRestaurantType:
+  - deleteRestaurantType:
+  - updateRestaurantType:
 towns:
   - getAllTowns:
   - getTownsByDistrict:

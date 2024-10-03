@@ -19,14 +19,14 @@ import 'country.dart' as _i6;
 import 'district.dart' as _i7;
 import 'example.dart' as _i8;
 import 'menu.dart' as _i9;
-import 'menu_type.dart' as _i10;
+import 'restaurant_type.dart' as _i10;
 import 'town.dart' as _i11;
 import 'protocol.dart' as _i12;
 import 'package:menu_pal_server/src/generated/city.dart' as _i13;
 import 'package:menu_pal_server/src/generated/country.dart' as _i14;
 import 'package:menu_pal_server/src/generated/district.dart' as _i15;
-import 'package:menu_pal_server/src/generated/menu_type.dart' as _i16;
-import 'package:menu_pal_server/src/generated/menu.dart' as _i17;
+import 'package:menu_pal_server/src/generated/menu.dart' as _i16;
+import 'package:menu_pal_server/src/generated/restaurant_type.dart' as _i17;
 import 'package:menu_pal_server/src/generated/town.dart' as _i18;
 export 'address.dart';
 export 'city.dart';
@@ -34,7 +34,7 @@ export 'country.dart';
 export 'district.dart';
 export 'example.dart';
 export 'menu.dart';
-export 'menu_type.dart';
+export 'restaurant_type.dart';
 export 'town.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -136,8 +136,25 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: true,
           dartType: 'double?',
         ),
+        _i2.ColumnDefinition(
+          name: 'menuId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'address_fk_0',
+          columns: ['menuId'],
+          referenceTable: 'menu',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'address_pkey',
@@ -521,10 +538,10 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'type',
-          columnType: _i2.ColumnType.text,
+          name: 'restaurantTypeIds',
+          columnType: _i2.ColumnType.json,
           isNullable: true,
-          dartType: 'String?',
+          dartType: 'List<int>?',
         ),
         _i2.ColumnDefinition(
           name: 'star',
@@ -552,6 +569,12 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'createdBy',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'deletedBy',
           columnType: _i2.ColumnType.text,
           isNullable: true,
           dartType: 'String?',
@@ -593,16 +616,10 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'website',
-          columnType: _i2.ColumnType.text,
+          name: 'restaurantTypes',
+          columnType: _i2.ColumnType.json,
           isNullable: true,
-          dartType: 'String?',
-        ),
-        _i2.ColumnDefinition(
-          name: 'addressId',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: true,
-          dartType: 'int?',
+          dartType: 'List<protocol:RestaurantType>?',
         ),
       ],
       foreignKeys: [],
@@ -624,8 +641,8 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'menu_type',
-      dartName: 'MenuType',
+      name: 'restaurant_type',
+      dartName: 'RestaurantType',
       schema: 'public',
       module: 'menu_pal',
       columns: [
@@ -634,7 +651,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'menu_type_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'restaurant_type_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'name',
@@ -676,7 +693,7 @@ class Protocol extends _i1.SerializationManagerServer {
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'menu_type_pkey',
+          indexName: 'restaurant_type_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -816,8 +833,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i9.Menu) {
       return _i9.Menu.fromJson(data) as T;
     }
-    if (t == _i10.MenuType) {
-      return _i10.MenuType.fromJson(data) as T;
+    if (t == _i10.RestaurantType) {
+      return _i10.RestaurantType.fromJson(data) as T;
     }
     if (t == _i11.Town) {
       return _i11.Town.fromJson(data) as T;
@@ -840,8 +857,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i9.Menu?>()) {
       return (data != null ? _i9.Menu.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.MenuType?>()) {
-      return (data != null ? _i10.MenuType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i10.RestaurantType?>()) {
+      return (data != null ? _i10.RestaurantType.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i11.Town?>()) {
       return (data != null ? _i11.Town.fromJson(data) : null) as T;
@@ -861,9 +878,26 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<_i12.Town>(e)).toList()
           : null) as dynamic;
     }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.Address>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i12.Address>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.RestaurantType>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i12.RestaurantType>(e))
+              .toList()
           : null) as dynamic;
     }
     if (t == List<_i13.City>) {
@@ -878,13 +912,14 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data as List).map((e) => deserialize<_i15.District>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i16.MenuType>) {
-      return (data as List).map((e) => deserialize<_i16.MenuType>(e)).toList()
+    if (t == List<_i16.Menu>) {
+      return (data as List).map((e) => deserialize<_i16.Menu>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i17.Menu>) {
-      return (data as List).map((e) => deserialize<_i17.Menu>(e)).toList()
-          as dynamic;
+    if (t == List<_i17.RestaurantType>) {
+      return (data as List)
+          .map((e) => deserialize<_i17.RestaurantType>(e))
+          .toList() as dynamic;
     }
     if (t == List<_i18.Town>) {
       return (data as List).map((e) => deserialize<_i18.Town>(e)).toList()
@@ -921,8 +956,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i9.Menu) {
       return 'Menu';
     }
-    if (data is _i10.MenuType) {
-      return 'MenuType';
+    if (data is _i10.RestaurantType) {
+      return 'RestaurantType';
     }
     if (data is _i11.Town) {
       return 'Town';
@@ -958,8 +993,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'Menu') {
       return deserialize<_i9.Menu>(data['data']);
     }
-    if (data['className'] == 'MenuType') {
-      return deserialize<_i10.MenuType>(data['data']);
+    if (data['className'] == 'RestaurantType') {
+      return deserialize<_i10.RestaurantType>(data['data']);
     }
     if (data['className'] == 'Town') {
       return deserialize<_i11.Town>(data['data']);
@@ -1000,8 +1035,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i7.District.t;
       case _i9.Menu:
         return _i9.Menu.t;
-      case _i10.MenuType:
-        return _i10.MenuType.t;
+      case _i10.RestaurantType:
+        return _i10.RestaurantType.t;
       case _i11.Town:
         return _i11.Town.t;
     }

@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
   Address._({
@@ -27,6 +28,8 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     this.longitude,
     this.population,
     this.area,
+    this.menuId,
+    this.menu,
   });
 
   factory Address({
@@ -44,6 +47,8 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   }) = _AddressImpl;
 
   factory Address.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -68,6 +73,11 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
       longitude: (jsonSerialization['longitude'] as num?)?.toDouble(),
       population: jsonSerialization['population'] as int?,
       area: (jsonSerialization['area'] as num?)?.toDouble(),
+      menuId: jsonSerialization['menuId'] as int?,
+      menu: jsonSerialization['menu'] == null
+          ? null
+          : _i2.Menu.fromJson(
+              (jsonSerialization['menu'] as Map<String, dynamic>)),
     );
   }
 
@@ -104,6 +114,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
 
   double? area;
 
+  int? menuId;
+
+  _i2.Menu? menu;
+
   @override
   _i1.Table get table => t;
 
@@ -122,6 +136,8 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -140,6 +156,8 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
       if (area != null) 'area': area,
+      if (menuId != null) 'menuId': menuId,
+      if (menu != null) 'menu': menu?.toJson(),
     };
   }
 
@@ -160,11 +178,13 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
       if (area != null) 'area': area,
+      if (menuId != null) 'menuId': menuId,
+      if (menu != null) 'menu': menu?.toJsonForProtocol(),
     };
   }
 
-  static AddressInclude include() {
-    return AddressInclude._();
+  static AddressInclude include({_i2.MenuInclude? menu}) {
+    return AddressInclude._(menu: menu);
   }
 
   static AddressIncludeList includeList({
@@ -211,6 +231,8 @@ class _AddressImpl extends Address {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   }) : super._(
           id: id,
           street: street,
@@ -226,6 +248,8 @@ class _AddressImpl extends Address {
           longitude: longitude,
           population: population,
           area: area,
+          menuId: menuId,
+          menu: menu,
         );
 
   @override
@@ -244,6 +268,8 @@ class _AddressImpl extends Address {
     Object? longitude = _Undefined,
     Object? population = _Undefined,
     Object? area = _Undefined,
+    Object? menuId = _Undefined,
+    Object? menu = _Undefined,
   }) {
     return Address(
       id: id is int? ? id : this.id,
@@ -260,6 +286,8 @@ class _AddressImpl extends Address {
       longitude: longitude is double? ? longitude : this.longitude,
       population: population is int? ? population : this.population,
       area: area is double? ? area : this.area,
+      menuId: menuId is int? ? menuId : this.menuId,
+      menu: menu is _i2.Menu? ? menu : this.menu?.copyWith(),
     );
   }
 }
@@ -318,6 +346,10 @@ class AddressTable extends _i1.Table {
       'area',
       this,
     );
+    menuId = _i1.ColumnInt(
+      'menuId',
+      this,
+    );
   }
 
   late final _i1.ColumnString street;
@@ -346,6 +378,23 @@ class AddressTable extends _i1.Table {
 
   late final _i1.ColumnDouble area;
 
+  late final _i1.ColumnInt menuId;
+
+  _i2.MenuTable? _menu;
+
+  _i2.MenuTable get menu {
+    if (_menu != null) return _menu!;
+    _menu = _i1.createRelationTable(
+      relationFieldName: 'menu',
+      field: Address.t.menuId,
+      foreignField: _i2.Menu.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.MenuTable(tableRelation: foreignTableRelation),
+    );
+    return _menu!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -362,14 +411,27 @@ class AddressTable extends _i1.Table {
         longitude,
         population,
         area,
+        menuId,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'menu') {
+      return menu;
+    }
+    return null;
+  }
 }
 
 class AddressInclude extends _i1.IncludeObject {
-  AddressInclude._();
+  AddressInclude._({_i2.MenuInclude? menu}) {
+    _menu = menu;
+  }
+
+  _i2.MenuInclude? _menu;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'menu': _menu};
 
   @override
   _i1.Table get table => Address.t;
@@ -398,6 +460,10 @@ class AddressIncludeList extends _i1.IncludeList {
 class AddressRepository {
   const AddressRepository._();
 
+  final attachRow = const AddressAttachRowRepository._();
+
+  final detachRow = const AddressDetachRowRepository._();
+
   Future<List<Address>> find(
     _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<AddressTable>? where,
@@ -407,6 +473,7 @@ class AddressRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<AddressTable>? orderByList,
     _i1.Transaction? transaction,
+    AddressInclude? include,
   }) async {
     return databaseAccessor.db.find<Address>(
       where: where?.call(Address.t),
@@ -416,6 +483,7 @@ class AddressRepository {
       limit: limit,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -427,6 +495,7 @@ class AddressRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<AddressTable>? orderByList,
     _i1.Transaction? transaction,
+    AddressInclude? include,
   }) async {
     return databaseAccessor.db.findFirstRow<Address>(
       where: where?.call(Address.t),
@@ -435,6 +504,7 @@ class AddressRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -442,10 +512,12 @@ class AddressRepository {
     _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
+    AddressInclude? include,
   }) async {
     return databaseAccessor.db.findById<Address>(
       id,
       transaction: transaction ?? databaseAccessor.transaction,
+      include: include,
     );
   }
 
@@ -539,6 +611,52 @@ class AddressRepository {
     return databaseAccessor.db.count<Address>(
       where: where?.call(Address.t),
       limit: limit,
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class AddressAttachRowRepository {
+  const AddressAttachRowRepository._();
+
+  Future<void> menu(
+    _i1.DatabaseAccessor databaseAccessor,
+    Address address,
+    _i2.Menu menu, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.id == null) {
+      throw ArgumentError.notNull('address.id');
+    }
+    if (menu.id == null) {
+      throw ArgumentError.notNull('menu.id');
+    }
+
+    var $address = address.copyWith(menuId: menu.id);
+    await databaseAccessor.db.updateRow<Address>(
+      $address,
+      columns: [Address.t.menuId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+}
+
+class AddressDetachRowRepository {
+  const AddressDetachRowRepository._();
+
+  Future<void> menu(
+    _i1.DatabaseAccessor databaseAccessor,
+    Address address, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (address.id == null) {
+      throw ArgumentError.notNull('address.id');
+    }
+
+    var $address = address.copyWith(menuId: null);
+    await databaseAccessor.db.updateRow<Address>(
+      $address,
+      columns: [Address.t.menuId],
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }

@@ -1,0 +1,144 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "menu_type"
+    },
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "menu",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "restaurantTypeIds",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<int>?"
+          },
+          {
+            "name": "restaurantType",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<protocol:RestaurantType>?"
+          }
+        ],
+        "deleteColumns": [
+          "type"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "tableDropped",
+            "message": "Table \"menu_type\" will be dropped.",
+            "table": "menu_type",
+            "columns": [],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"type\" of table \"menu\" will be dropped.",
+            "table": "menu",
+            "columns": [
+              "type"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "restaurant_type",
+        "dartName": "RestaurantType",
+        "module": "menu_pal",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('restaurant_type_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "name",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "description",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": true,
+            "dartType": "DateTime?"
+          },
+          {
+            "name": "updatedAt",
+            "columnType": 4,
+            "isNullable": true,
+            "dartType": "DateTime?"
+          },
+          {
+            "name": "deletedAt",
+            "columnType": 4,
+            "isNullable": true,
+            "dartType": "DateTime?"
+          },
+          {
+            "name": "createdBy",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "restaurant_type_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "tableDropped",
+      "message": "Table \"menu_type\" will be dropped.",
+      "table": "menu_type",
+      "columns": [],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"type\" of table \"menu\" will be dropped.",
+      "table": "menu",
+      "columns": [
+        "type"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

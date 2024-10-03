@@ -1,0 +1,50 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "menu",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "restaurantTypes",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<protocol:RestaurantType>?"
+          }
+        ],
+        "deleteColumns": [
+          "restaurantType"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"restaurantType\" of table \"menu\" will be dropped.",
+            "table": "menu",
+            "columns": [
+              "restaurantType"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"restaurantType\" of table \"menu\" will be dropped.",
+      "table": "menu",
+      "columns": [
+        "restaurantType"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

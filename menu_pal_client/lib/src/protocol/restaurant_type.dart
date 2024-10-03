@@ -11,8 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class MenuType implements _i1.SerializableModel {
-  MenuType._({
+abstract class RestaurantType implements _i1.SerializableModel {
+  RestaurantType._({
     this.id,
     this.name,
     this.description,
@@ -22,7 +22,7 @@ abstract class MenuType implements _i1.SerializableModel {
     this.createdBy,
   });
 
-  factory MenuType({
+  factory RestaurantType({
     int? id,
     String? name,
     String? description,
@@ -30,10 +30,10 @@ abstract class MenuType implements _i1.SerializableModel {
     DateTime? updatedAt,
     DateTime? deletedAt,
     String? createdBy,
-  }) = _MenuTypeImpl;
+  }) = _RestaurantTypeImpl;
 
-  factory MenuType.fromJson(Map<String, dynamic> jsonSerialization) {
-    return MenuType(
+  factory RestaurantType.fromJson(Map<String, dynamic> jsonSerialization) {
+    return RestaurantType(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String?,
       description: jsonSerialization['description'] as String?,
@@ -67,7 +67,7 @@ abstract class MenuType implements _i1.SerializableModel {
 
   String? createdBy;
 
-  MenuType copyWith({
+  RestaurantType copyWith({
     int? id,
     String? name,
     String? description,
@@ -97,8 +97,8 @@ abstract class MenuType implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _MenuTypeImpl extends MenuType {
-  _MenuTypeImpl({
+class _RestaurantTypeImpl extends RestaurantType {
+  _RestaurantTypeImpl({
     int? id,
     String? name,
     String? description,
@@ -117,7 +117,7 @@ class _MenuTypeImpl extends MenuType {
         );
 
   @override
-  MenuType copyWith({
+  RestaurantType copyWith({
     Object? id = _Undefined,
     Object? name = _Undefined,
     Object? description = _Undefined,
@@ -126,7 +126,7 @@ class _MenuTypeImpl extends MenuType {
     Object? deletedAt = _Undefined,
     Object? createdBy = _Undefined,
   }) {
-    return MenuType(
+    return RestaurantType(
       id: id is int? ? id : this.id,
       name: name is String? ? name : this.name,
       description: description is String? ? description : this.description,

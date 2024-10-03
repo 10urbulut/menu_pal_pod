@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Address implements _i1.SerializableModel {
   Address._({
@@ -27,6 +28,8 @@ abstract class Address implements _i1.SerializableModel {
     this.longitude,
     this.population,
     this.area,
+    this.menuId,
+    this.menu,
   });
 
   factory Address({
@@ -44,6 +47,8 @@ abstract class Address implements _i1.SerializableModel {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   }) = _AddressImpl;
 
   factory Address.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -68,6 +73,11 @@ abstract class Address implements _i1.SerializableModel {
       longitude: (jsonSerialization['longitude'] as num?)?.toDouble(),
       population: jsonSerialization['population'] as int?,
       area: (jsonSerialization['area'] as num?)?.toDouble(),
+      menuId: jsonSerialization['menuId'] as int?,
+      menu: jsonSerialization['menu'] == null
+          ? null
+          : _i2.Menu.fromJson(
+              (jsonSerialization['menu'] as Map<String, dynamic>)),
     );
   }
 
@@ -102,6 +112,10 @@ abstract class Address implements _i1.SerializableModel {
 
   double? area;
 
+  int? menuId;
+
+  _i2.Menu? menu;
+
   Address copyWith({
     int? id,
     String? street,
@@ -117,6 +131,8 @@ abstract class Address implements _i1.SerializableModel {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -135,6 +151,8 @@ abstract class Address implements _i1.SerializableModel {
       if (longitude != null) 'longitude': longitude,
       if (population != null) 'population': population,
       if (area != null) 'area': area,
+      if (menuId != null) 'menuId': menuId,
+      if (menu != null) 'menu': menu?.toJson(),
     };
   }
 
@@ -162,6 +180,8 @@ class _AddressImpl extends Address {
     double? longitude,
     int? population,
     double? area,
+    int? menuId,
+    _i2.Menu? menu,
   }) : super._(
           id: id,
           street: street,
@@ -177,6 +197,8 @@ class _AddressImpl extends Address {
           longitude: longitude,
           population: population,
           area: area,
+          menuId: menuId,
+          menu: menu,
         );
 
   @override
@@ -195,6 +217,8 @@ class _AddressImpl extends Address {
     Object? longitude = _Undefined,
     Object? population = _Undefined,
     Object? area = _Undefined,
+    Object? menuId = _Undefined,
+    Object? menu = _Undefined,
   }) {
     return Address(
       id: id is int? ? id : this.id,
@@ -211,6 +235,8 @@ class _AddressImpl extends Address {
       longitude: longitude is double? ? longitude : this.longitude,
       population: population is int? ? population : this.population,
       area: area is double? ? area : this.area,
+      menuId: menuId is int? ? menuId : this.menuId,
+      menu: menu is _i2.Menu? ? menu : this.menu?.copyWith(),
     );
   }
 }
