@@ -15,7 +15,7 @@ service_account_email = "<SERVICE ACCOUNT EMAIL>"
 # The name of your DNS zone.
 dns_managed_zone = "<MANAGED ZONE>"
 
-# The top domain of your DNS zone. e.g. "examplepod.com"
+# The top domain of your DNS zone. e.g. "menupalpod.com"
 top_domain = "<YOUR DOMAIN NAME>"
 
 # The region and zone to use for the deployment. Default values work.

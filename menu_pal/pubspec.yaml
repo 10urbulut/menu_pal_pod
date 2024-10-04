@@ -35,9 +35,9 @@ dependencies:
   animations: ^2.0.3
 
   image_provider:
-    path: /Users/onurbulut/Projects/flutter_projects/image_provider
-    # git:
-    #   url: https://github.com/CosmosExmo/image_provider.git
+    # path: /Users/onurbulut/Projects/flutter_projects/image_provider
+    git:
+      url: https://github.com/CosmosExmo/image_provider.git
 
   # focused_image_widget:
   #   git:
