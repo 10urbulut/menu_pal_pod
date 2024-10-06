@@ -7,21 +7,21 @@
 # Configuration for the main API server.
 apiServer:
   port: 8080
-  # publicHost: api.menupalpod.com
+  publicHost: api.menupalpod.com
   publicPort: 443
   publicScheme: https
 
 # Configuration for the Insights server.
 insightsServer:
   port: 8081
-  # publicHost: insights.menupalpod.com
+  publicHost: insights.menupalpod.com
   publicPort: 443
   publicScheme: https
 
 # Configuration for the web server.
 webServer:
   port: 8082
-  # publicHost: app.menupalpod.com
+  publicHost: app.menupalpod.com
   publicPort: 443
   publicScheme: https
 
@@ -30,7 +30,7 @@ webServer:
 # If you are connecting on a public IP (e.g. on AWS or Google Cloud Run), you
 # connect on the public IP of the database e.g. database.menupalpod.com.
 database:
-  # host: database.private-production.menupalpod.com
+  host: database.private-production.menupalpod.com
   port: 5432
   name: serverpod
   user: postgres
@@ -42,5 +42,5 @@ database:
 # connect on the public IP of the database e.g. redis.menupalpod.com.
 redis:
   enabled: false
-  # host: redis.private-production.menupalpod.com
+  host: redis.private-production.menupalpod.com
   port: 6379
