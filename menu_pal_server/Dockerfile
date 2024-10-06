@@ -1,4 +1,4 @@
-FROM dart:3.3.0 AS build
+FROM --platform=linux/amd64 dart:3.3.0 AS build
 
 WORKDIR /app
 COPY . .
