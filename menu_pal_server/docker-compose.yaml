@@ -23,7 +23,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: menu_pal
-      POSTGRES_PASSWORD: "V4QKEB1W6w5J-DjVN77Dqy0FCjQapVUm"
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - menu_pal_data:/var/lib/postgresql/data

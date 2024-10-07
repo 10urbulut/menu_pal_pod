@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN dart pub get
-RUN dart compile --verbose exe bin/main.dart -o bin/server
+RUN dart compile --verbose exe bin/main.dart -o bin/server  --apply-migrations
 
 
 FROM alpine:latest
