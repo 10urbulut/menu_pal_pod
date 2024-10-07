@@ -169,7 +169,8 @@ class EndpointMenus extends _i1.EndpointRef {
   @override
   String get name => 'menus';
 
-  _i2.Future<void> addMenu(_i6.Menu menu) => caller.callServerEndpoint<void>(
+  _i2.Future<String?> addMenu(_i6.Menu menu) =>
+      caller.callServerEndpoint<String?>(
         'menus',
         'addMenu',
         {'menu': menu},
@@ -294,6 +295,18 @@ class EndpointWorkPlace extends _i1.EndpointRef {
         'workPlace',
         'workHere',
         {'name': name},
+      );
+
+  _i2.Future<void> getDistrictByCity() => caller.callServerEndpoint<void>(
+        'workPlace',
+        'getDistrictByCity',
+        {},
+      );
+
+  _i2.Future<void> getTownByDistrict() => caller.callServerEndpoint<void>(
+        'workPlace',
+        'getTownByDistrict',
+        {},
       );
 }
 

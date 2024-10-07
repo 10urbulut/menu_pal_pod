@@ -1,4 +1,4 @@
-FROM dart:stable AS build
+FROM dart:3.3.0 AS build
 
 WORKDIR /app
 COPY . .
@@ -13,6 +13,7 @@ ENV runmode=production
 ENV serverid=default
 ENV logging=normal
 ENV role=monolith
+
 
 COPY --from=build /runtime/ /
 COPY --from=build /app/bin/server server

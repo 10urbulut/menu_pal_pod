@@ -1,7 +1,7 @@
 import 'package:menu_pal/app/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:menu_pal/models/menu/menu_model.dart';
 
 import 'package:menu_pal_client/menu_pal_client.dart';

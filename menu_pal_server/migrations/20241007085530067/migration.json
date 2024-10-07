@@ -1,0 +1,125 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "address",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "cityId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          },
+          {
+            "name": "townId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          },
+          {
+            "name": "districtId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          },
+          {
+            "name": "countryId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "city",
+          "town",
+          "district",
+          "country"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"city\" of table \"address\" will be dropped.",
+            "table": "address",
+            "columns": [
+              "city"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"town\" of table \"address\" will be dropped.",
+            "table": "address",
+            "columns": [
+              "town"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"district\" of table \"address\" will be dropped.",
+            "table": "address",
+            "columns": [
+              "district"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"country\" of table \"address\" will be dropped.",
+            "table": "address",
+            "columns": [
+              "country"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"city\" of table \"address\" will be dropped.",
+      "table": "address",
+      "columns": [
+        "city"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"town\" of table \"address\" will be dropped.",
+      "table": "address",
+      "columns": [
+        "town"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"district\" of table \"address\" will be dropped.",
+      "table": "address",
+      "columns": [
+        "district"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"country\" of table \"address\" will be dropped.",
+      "table": "address",
+      "columns": [
+        "country"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

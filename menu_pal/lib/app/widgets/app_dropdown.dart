@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:menu_pal/app/app_defaults.dart';
 
-class AppDropdown extends StatelessWidget {
+class AppDropdown<T> extends StatelessWidget {
   const AppDropdown({
     super.key,
     this.items,
@@ -16,10 +16,9 @@ class AppDropdown extends StatelessWidget {
     this.dropdownBuilder,
     this.icon,
   });
-  final FutureOr<List<dynamic>> Function(String filter, LoadProps? loadProps)?
-      items;
+  final FutureOr<List<T>> Function(String filter, LoadProps? loadProps)? items;
   final Widget? popupLabel;
-  final void Function(dynamic)? onChanged;
+  final void Function(dynamic value)? onChanged;
   final String? labelText;
   final Widget Function(BuildContext context, dynamic selectedItem)?
       dropdownBuilder;
@@ -28,7 +27,7 @@ class AppDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownSearch(
+    return DropdownSearch<T>(
       onChanged: onChanged,
       items: items,
       itemAsString: itemAsString,
@@ -60,7 +59,7 @@ class AppDropdown extends StatelessWidget {
   }
 }
 
-class AppDropdownMulti extends StatelessWidget {
+class AppDropdownMulti<T> extends StatelessWidget {
   const AppDropdownMulti({
     super.key,
     this.items,
@@ -72,9 +71,8 @@ class AppDropdownMulti extends StatelessWidget {
     this.icon,
     this.selectedItems = const [],
   });
-  final List<dynamic> selectedItems;
-  final FutureOr<List<dynamic>> Function(String filter, LoadProps? loadProps)?
-      items;
+  final List<T> selectedItems;
+  final FutureOr<List<T>> Function(String filter, LoadProps? loadProps)? items;
   final Widget? popupLabel;
   final void Function(dynamic)? onChanged;
   final String? labelText;
@@ -85,7 +83,7 @@ class AppDropdownMulti extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownSearch.multiSelection(
+    return DropdownSearch<T>.multiSelection(
       selectedItems: selectedItems,
       onChanged: onChanged,
       items: items,

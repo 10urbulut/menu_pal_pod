@@ -28,8 +28,8 @@ class DataService {
     return null;
   }
 
-  Future<void> addMenu(Menu menu) async {
-    await _client.menus.addMenu(menu);
+  Future<String?> addMenu(Menu menu) async {
+    return await _client.menus.addMenu(menu);
   }
 
   Future<void> addMenuType(RestaurantType menuType) async {
@@ -37,7 +37,7 @@ class DataService {
   }
 
   Future<void> deleteMenu(Menu menu) async {
-    await _client.menus.deleteMenu(menu);
+    return await _client.menus.deleteMenu(menu);
   }
 
   Future<List<City>> getAllCities() async {

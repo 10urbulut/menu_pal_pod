@@ -2,10 +2,10 @@ class: Address
 table: address
 fields:
   street: String?
-  city: int?
-  town: int?
-  district: int?
-  country: int?
+  cityId: int?
+  townId: int?
+  districtId: int?
+  countryId: int?
   createdAt: DateTime?
   updatedAt: DateTime?
   deletedAt: DateTime?

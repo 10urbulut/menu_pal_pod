@@ -58,11 +58,12 @@ class AddMenuViewModel extends BaseViewModel {
   }
 
   Future<void> addMenu() async {
-    if (addMenuRules() == false) {
+    String? result = await dataService.addMenu(setMenuForSaving());
+
+    if (result != null) {
+      popupService.showNoWay(result);
       return;
     }
-
-    await dataService.addMenu(setMenuForSaving());
     await appRouter.maybePop();
   }
 
@@ -79,9 +80,9 @@ class AddMenuViewModel extends BaseViewModel {
               locationTextFieldController.text.split(',').first),
           longitude:
               double.tryParse(locationTextFieldController.text.split(',').last),
-          city: selectedCityId,
-          district: selectedDistrictId,
-          town: selectedTownId,
+          cityId: selectedCityId,
+          districtId: selectedDistrictId,
+          townId: selectedTownId,
         ),
       ],
       restaurantTypeIds: selectedRestaurantTypes.map((e) => e.id!).toList(),
@@ -166,56 +167,8 @@ class AddMenuViewModel extends BaseViewModel {
   List<Town> get towns => _towns.toList();
 
   void restaurantTypesOnChanged(dynamic value) {
-    if (value is List<RestaurantType>) {
-      _selectedRestaurantTypes = value;
-      notifyListeners();
-    }
-  }
-
-  bool addMenuRules() {
-    if (nameTextFieldController.text.isEmpty) {
-      popupService.showNoWay("Name cannot be empty");
-      return false;
-    }
-
-    if (qrTextFieldController.text.isEmpty) {
-      popupService.showNoWay("QR Code cannot be empty");
-      return false;
-    }
-
-    if (descriptionTextFieldController.text.isEmpty) {
-      // return false;
-    }
-
-    if (locationTextFieldController.text.isEmpty) {
-      // return false;
-    }
-
-    if (streetTextFieldController.text.isEmpty) {
-      debugPrint('Street is empty');
-      return false;
-    }
-
-    if (selectedCityId == null) {
-      debugPrint('City is empty');
-      return false;
-    }
-
-    if (selectedDistrictId == null) {
-      debugPrint('District is empty');
-      return false;
-    }
-
-    if (selectedTownId == null) {
-      debugPrint('Town is empty');
-      return false;
-    }
-
-    if (restaurantTypes.isEmpty) {
-      debugPrint('Type is empty');
-      return false;
-    }
-
-    return true;
+    var list = value as List<RestaurantType>;
+    _selectedRestaurantTypes = list;
+    notifyListeners();
   }
 }

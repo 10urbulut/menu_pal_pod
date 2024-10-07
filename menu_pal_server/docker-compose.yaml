@@ -1,22 +1,40 @@
-version: '3.7'
+version: "3.7"
 
 services:
-  postgres:
-    image: postgres:16.3
+  api:
+    image: 10urb/menupal
+    container_name: menupal_api
     ports:
-      - '8090:5432'
+      - "8080:8080"
+    environment:
+      - SERVERPOD_CONFIG_FILE=/config/production.yaml
+      - SERVERPOD_PASSWORD_FILE=/config/passwords.yaml
+    depends_on:
+      - postgres
+    volumes:
+      - ./config:/config
+
+  postgres:
+    restart: always
+    image: postgres:16.3
+    container_name: menupal_postgres
+    ports:
+      - "8090:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: menu_pal
-      POSTGRES_PASSWORD: "V4QKEB1W6w5J-DjVN77Dqy0FCjQapVUm"
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - menu_pal_data:/var/lib/postgresql/data
-  redis:
-    image: redis:6.2.6
-    ports:
-      - '8091:6379'
-    command: redis-server --requirepass "W825M9tXQ-kslsiO5MsZGuKbKTMBVZua"
-    environment:
-      - REDIS_REPLICATION_MODE=master
+
+  # redis:
+  #   image: redis:6.2.6
+  #   container_name: menupal_redis
+  #   ports:
+  #     - "8091:6379"
+  #   command: redis-server --requirepass "W825M9tXQ-kslsiO5MsZGuKbKTMBVZua"
+  #   environment:
+  #     - REDIS_REPLICATION_MODE=master
+
 volumes:
   menu_pal_data:

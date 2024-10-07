@@ -1,0 +1,50 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "district",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "area",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [
+          "area"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column area of table district is modified in a way that it must be deleted and recreated.",
+            "table": "district",
+            "columns": [
+              "area"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column area of table district is modified in a way that it must be deleted and recreated.",
+      "table": "district",
+      "columns": [
+        "area"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

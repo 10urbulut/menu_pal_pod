@@ -91,19 +91,25 @@ class _ViewContent extends StatelessWidget {
                 Expanded(
                   child: Selector<HomeViewModel, List<MenuModel>>(
                     selector: (context, viewModel) => viewModel.filteredMenus,
-                    builder: (context, links, _) => GridView.builder(
-                      padding: const EdgeInsets.all(10),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 1.27 / 2,
+                    builder: (context, links, _) => Visibility(
+                      visible: links.isNotEmpty,
+                      replacement: const Center(
+                        child: Text("No Menu Found :("),
                       ),
-                      itemCount: links.length,
-                      itemBuilder: (context, index) {
-                        return _ItemWidget(links[index]);
-                      },
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(10),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 1.27 / 2,
+                        ),
+                        itemCount: links.length,
+                        itemBuilder: (context, index) {
+                          return _ItemWidget(links[index]);
+                        },
+                      ),
                     ),
                   ),
                 ),

@@ -61,7 +61,7 @@ class _ViewContent extends StatelessWidget {
           controller:
               context.read<AddMenuViewModel>().descriptionTextFieldController,
         ),
-        AppDropdownMulti(
+        AppDropdownMulti<RestaurantType>(
           selectedItems:
               context.read<AddMenuViewModel>().selectedRestaurantTypes,
           onChanged: context.read<AddMenuViewModel>().restaurantTypesOnChanged,

@@ -641,7 +641,27 @@ class Endpoints extends _i1.EndpointDispatch {
             session,
             params['name'],
           ),
-        )
+        ),
+        'getDistrictByCity': _i1.MethodConnector(
+          name: 'getDistrictByCity',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['workPlace'] as _i8.WorkPlaceEndpoint)
+                  .getDistrictByCity(session),
+        ),
+        'getTownByDistrict': _i1.MethodConnector(
+          name: 'getTownByDistrict',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['workPlace'] as _i8.WorkPlaceEndpoint)
+                  .getTownByDistrict(session),
+        ),
       },
     );
     modules['serverpod_auth'] = _i15.Endpoints()..initializeEndpoints(server);

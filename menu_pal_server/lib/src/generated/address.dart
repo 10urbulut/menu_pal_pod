@@ -16,10 +16,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
   Address._({
     this.id,
     this.street,
-    this.city,
-    this.town,
-    this.district,
-    this.country,
+    this.cityId,
+    this.townId,
+    this.districtId,
+    this.countryId,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -35,10 +35,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
   factory Address({
     int? id,
     String? street,
-    int? city,
-    int? town,
-    int? district,
-    int? country,
+    int? cityId,
+    int? townId,
+    int? districtId,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -55,10 +55,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     return Address(
       id: jsonSerialization['id'] as int?,
       street: jsonSerialization['street'] as String?,
-      city: jsonSerialization['city'] as int?,
-      town: jsonSerialization['town'] as int?,
-      district: jsonSerialization['district'] as int?,
-      country: jsonSerialization['country'] as int?,
+      cityId: jsonSerialization['cityId'] as int?,
+      townId: jsonSerialization['townId'] as int?,
+      districtId: jsonSerialization['districtId'] as int?,
+      countryId: jsonSerialization['countryId'] as int?,
       createdAt: jsonSerialization['createdAt'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -90,13 +90,13 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String? street;
 
-  int? city;
+  int? cityId;
 
-  int? town;
+  int? townId;
 
-  int? district;
+  int? districtId;
 
-  int? country;
+  int? countryId;
 
   DateTime? createdAt;
 
@@ -124,10 +124,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
   Address copyWith({
     int? id,
     String? street,
-    int? city,
-    int? town,
-    int? district,
-    int? country,
+    int? cityId,
+    int? townId,
+    int? districtId,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -144,10 +144,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       if (street != null) 'street': street,
-      if (city != null) 'city': city,
-      if (town != null) 'town': town,
-      if (district != null) 'district': district,
-      if (country != null) 'country': country,
+      if (cityId != null) 'cityId': cityId,
+      if (townId != null) 'townId': townId,
+      if (districtId != null) 'districtId': districtId,
+      if (countryId != null) 'countryId': countryId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -166,10 +166,10 @@ abstract class Address implements _i1.TableRow, _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       if (street != null) 'street': street,
-      if (city != null) 'city': city,
-      if (town != null) 'town': town,
-      if (district != null) 'district': district,
-      if (country != null) 'country': country,
+      if (cityId != null) 'cityId': cityId,
+      if (townId != null) 'townId': townId,
+      if (districtId != null) 'districtId': districtId,
+      if (countryId != null) 'countryId': countryId,
       if (createdAt != null) 'createdAt': createdAt?.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -219,10 +219,10 @@ class _AddressImpl extends Address {
   _AddressImpl({
     int? id,
     String? street,
-    int? city,
-    int? town,
-    int? district,
-    int? country,
+    int? cityId,
+    int? townId,
+    int? districtId,
+    int? countryId,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
@@ -236,10 +236,10 @@ class _AddressImpl extends Address {
   }) : super._(
           id: id,
           street: street,
-          city: city,
-          town: town,
-          district: district,
-          country: country,
+          cityId: cityId,
+          townId: townId,
+          districtId: districtId,
+          countryId: countryId,
           createdAt: createdAt,
           updatedAt: updatedAt,
           deletedAt: deletedAt,
@@ -256,10 +256,10 @@ class _AddressImpl extends Address {
   Address copyWith({
     Object? id = _Undefined,
     Object? street = _Undefined,
-    Object? city = _Undefined,
-    Object? town = _Undefined,
-    Object? district = _Undefined,
-    Object? country = _Undefined,
+    Object? cityId = _Undefined,
+    Object? townId = _Undefined,
+    Object? districtId = _Undefined,
+    Object? countryId = _Undefined,
     Object? createdAt = _Undefined,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
@@ -274,10 +274,10 @@ class _AddressImpl extends Address {
     return Address(
       id: id is int? ? id : this.id,
       street: street is String? ? street : this.street,
-      city: city is int? ? city : this.city,
-      town: town is int? ? town : this.town,
-      district: district is int? ? district : this.district,
-      country: country is int? ? country : this.country,
+      cityId: cityId is int? ? cityId : this.cityId,
+      townId: townId is int? ? townId : this.townId,
+      districtId: districtId is int? ? districtId : this.districtId,
+      countryId: countryId is int? ? countryId : this.countryId,
       createdAt: createdAt is DateTime? ? createdAt : this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
@@ -298,20 +298,20 @@ class AddressTable extends _i1.Table {
       'street',
       this,
     );
-    city = _i1.ColumnInt(
-      'city',
+    cityId = _i1.ColumnInt(
+      'cityId',
       this,
     );
-    town = _i1.ColumnInt(
-      'town',
+    townId = _i1.ColumnInt(
+      'townId',
       this,
     );
-    district = _i1.ColumnInt(
-      'district',
+    districtId = _i1.ColumnInt(
+      'districtId',
       this,
     );
-    country = _i1.ColumnInt(
-      'country',
+    countryId = _i1.ColumnInt(
+      'countryId',
       this,
     );
     createdAt = _i1.ColumnDateTime(
@@ -354,13 +354,13 @@ class AddressTable extends _i1.Table {
 
   late final _i1.ColumnString street;
 
-  late final _i1.ColumnInt city;
+  late final _i1.ColumnInt cityId;
 
-  late final _i1.ColumnInt town;
+  late final _i1.ColumnInt townId;
 
-  late final _i1.ColumnInt district;
+  late final _i1.ColumnInt districtId;
 
-  late final _i1.ColumnInt country;
+  late final _i1.ColumnInt countryId;
 
   late final _i1.ColumnDateTime createdAt;
 
@@ -399,10 +399,10 @@ class AddressTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         street,
-        city,
-        town,
-        district,
-        country,
+        cityId,
+        townId,
+        districtId,
+        countryId,
         createdAt,
         updatedAt,
         deletedAt,

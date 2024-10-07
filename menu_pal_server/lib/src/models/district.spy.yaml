@@ -10,7 +10,7 @@ fields:
   latitude: double?
   longitude: double?
   population: int?
-  area: double?
+  area: int?
   timezone: String?
   city: City?, relation(name = district_city, field=cityId)
   towns: List<Town>?, relation(name = town_district)

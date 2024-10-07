@@ -65,25 +65,25 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
-          name: 'city',
+          name: 'cityId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
         ),
         _i2.ColumnDefinition(
-          name: 'town',
+          name: 'townId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
         ),
         _i2.ColumnDefinition(
-          name: 'district',
+          name: 'districtId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
         ),
         _i2.ColumnDefinition(
-          name: 'country',
+          name: 'countryId',
           columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
@@ -454,9 +454,9 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'area',
-          columnType: _i2.ColumnType.doublePrecision,
+          columnType: _i2.ColumnType.bigint,
           isNullable: true,
-          dartType: 'double?',
+          dartType: 'int?',
         ),
         _i2.ColumnDefinition(
           name: 'timezone',

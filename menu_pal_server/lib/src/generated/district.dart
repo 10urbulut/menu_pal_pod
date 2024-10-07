@@ -41,7 +41,7 @@ abstract class District implements _i1.TableRow, _i1.ProtocolSerialization {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
+    int? area,
     String? timezone,
     _i2.City? city,
     List<_i2.Town>? towns,
@@ -65,7 +65,7 @@ abstract class District implements _i1.TableRow, _i1.ProtocolSerialization {
       latitude: (jsonSerialization['latitude'] as num?)?.toDouble(),
       longitude: (jsonSerialization['longitude'] as num?)?.toDouble(),
       population: jsonSerialization['population'] as int?,
-      area: (jsonSerialization['area'] as num?)?.toDouble(),
+      area: jsonSerialization['area'] as int?,
       timezone: jsonSerialization['timezone'] as String?,
       city: jsonSerialization['city'] == null
           ? null
@@ -102,7 +102,7 @@ abstract class District implements _i1.TableRow, _i1.ProtocolSerialization {
 
   int? population;
 
-  double? area;
+  int? area;
 
   String? timezone;
 
@@ -124,7 +124,7 @@ abstract class District implements _i1.TableRow, _i1.ProtocolSerialization {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
+    int? area,
     String? timezone,
     _i2.City? city,
     List<_i2.Town>? towns,
@@ -220,7 +220,7 @@ class _DistrictImpl extends District {
     double? latitude,
     double? longitude,
     int? population,
-    double? area,
+    int? area,
     String? timezone,
     _i2.City? city,
     List<_i2.Town>? towns,
@@ -269,7 +269,7 @@ class _DistrictImpl extends District {
       latitude: latitude is double? ? latitude : this.latitude,
       longitude: longitude is double? ? longitude : this.longitude,
       population: population is int? ? population : this.population,
-      area: area is double? ? area : this.area,
+      area: area is int? ? area : this.area,
       timezone: timezone is String? ? timezone : this.timezone,
       city: city is _i2.City? ? city : this.city?.copyWith(),
       towns: towns is List<_i2.Town>?
@@ -317,7 +317,7 @@ class DistrictTable extends _i1.Table {
       'population',
       this,
     );
-    area = _i1.ColumnDouble(
+    area = _i1.ColumnInt(
       'area',
       this,
     );
@@ -345,7 +345,7 @@ class DistrictTable extends _i1.Table {
 
   late final _i1.ColumnInt population;
 
-  late final _i1.ColumnDouble area;
+  late final _i1.ColumnInt area;
 
   late final _i1.ColumnString timezone;
 
