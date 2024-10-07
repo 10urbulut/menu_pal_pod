@@ -2,6 +2,9 @@ version: "3.7"
 
 services:
   api:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: 10urb/menupal
     container_name: menupal_api
     ports:
@@ -9,10 +12,6 @@ services:
     environment:
       - SERVERPOD_CONFIG_FILE=/config/production.yaml
       - SERVERPOD_PASSWORD_FILE=/config/passwords.yaml
-      - runmode=production
-      - serverid=default
-      - logging=normal
-      - role=monolith
 
     depends_on:
       - postgres
