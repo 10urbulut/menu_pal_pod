@@ -3,16 +3,11 @@ FROM dart:3.3.0 AS build
 WORKDIR /app
 COPY . .
 
-RUN dart pub global activate serverpod_cli
-ENV PATH="$PATH:/root/.pub-cache/bin"
-
 RUN dart pub get
-RUN dart compile --verbose exe bin/main.dart -o bin/server  --apply-migrations
+RUN dart compile --verbose exe bin/main.dart -o bin/server 
 
 
 FROM alpine:latest
-
-
 
 ENV runmode=production
 ENV serverid=default
@@ -28,5 +23,8 @@ COPY --from=build /app/web/ web/
 EXPOSE 8080
 EXPOSE 8081
 EXPOSE 8082
+
+RUN ./server migrate up --mode=$runmode --server-id=$serverid
+
 
 ENTRYPOINT ./server --mode=$runmode --server-id=$serverid --logging=$logging --role=$role
