@@ -9,6 +9,8 @@ services:
     environment:
       - SERVERPOD_CONFIG_FILE=/config/production.yaml
       - SERVERPOD_PASSWORD_FILE=/config/passwords.yaml
+    command: sh -c "./server migrate up --apply-migrations --mode=$runmode --server-id=$serverid && ./server --mode=$runmode --server-id=$serverid --logging=$logging --role=$role"
+
     depends_on:
       - postgres
     volumes:
