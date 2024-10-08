@@ -23,7 +23,7 @@ COPY --from=build /app/web/ web/
 COPY --from=build /app/migrations/ /app/migrations/
 
 # Copy passwords file
-COPY ./intolerapp_server/config/passwords.yaml /app/config/passwords.yaml
+# COPY ./intolerapp_server/config/passwords.yaml /app/config/passwords.yaml
 
 EXPOSE 8080
 EXPOSE 8081
