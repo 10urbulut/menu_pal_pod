@@ -25,6 +25,8 @@ COPY --from=build /app/migrations/ /app/migrations/
 # Copy passwords file
 # COPY ./config/passwords.yaml /app/config/passwords.yaml
 
+RUN chmod -R 755 /app
+
 EXPOSE 8080
 EXPOSE 8081
 EXPOSE 8082
