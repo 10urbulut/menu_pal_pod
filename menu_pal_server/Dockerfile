@@ -33,4 +33,4 @@ EXPOSE 8082
 
 # ENTRYPOINT ./server migrate up --mode=$runmode --server-id=$serverid && ./server --mode=$runmode --server-id=$serverid --logging=$logging --role=$role
 # ENTRYPOINT ["./server", "migrate", "up", "--mode=$runmode", "--server-id=$serverid", "&&", "./server", "--mode=$runmode", "--server-id=$serverid", "--logging=$logging", "--role=$role"]
-ENTRYPOINT ./server  migrate  up --mode=$runmode --server-id=$serverid &&  /server --mode=$runmode --server-id=$serverid --logging=$logging --role=$role
+ENTRYPOINT ./server --apply-migrations  migrate up --mode=$runmode --server-id=$serverid &&  /server --logging=$logging --role=$role
